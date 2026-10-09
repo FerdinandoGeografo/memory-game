@@ -1,7 +1,7 @@
 import { motion, type Variants } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { TILE_ICONS } from "@/constants/tile-icons";
+import { getTileValueName, TILE_ICONS } from "@/constants/tile-icons";
 
 // Driven by the board's stagger (GameBoard)
 const tileVariants: Variants = {
@@ -37,8 +37,7 @@ export default function Tile({
 }: TileProps) {
   const columns = gridSize === "4x4" ? 4 : 6;
   const position = `Row ${Math.floor(index / columns) + 1}, column ${(index % columns) + 1}`;
-  const valueName =
-    theme === "numbers" ? String(tile.value) : TILE_ICONS[tile.value].iconName;
+  const valueName = getTileValueName(tile.value, theme);
   const isCovered = tile.state === "covered";
   const label = isCovered
     ? `${position}, hidden`
