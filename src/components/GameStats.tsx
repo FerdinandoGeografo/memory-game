@@ -23,7 +23,7 @@ function PlayerCard({
     // so two players line up like the solo stats
     <motion.div
       variants={cardVariants}
-      className="relative flex flex-1 flex-col items-center gap-5.75 lg:max-w-63.75"
+      className="relative flex-1 lg:max-w-63.75"
     >
       {/* No animation for the first player: it enters with its card */}
       <AnimatePresence initial={false}>
@@ -57,16 +57,20 @@ function PlayerCard({
       />
 
       {isCurrent && (
-        // One label shared by the cards: on a turn change it travels to the
-        // new card with the highlight instead of disappearing
-        <motion.span
-          layoutId="current-turn"
-          layout="position"
-          transition={slide}
-          className="sr-only text-xs tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block"
-        >
-          Current turn
-        </motion.span>
+        // Out of the flow, 23px under the card: as in Figma it sits in the
+        // page's bottom space instead of making the stats taller
+        <div className="absolute inset-x-0 top-full mt-5.75 flex justify-center">
+          {/* One label shared by the cards: on a turn change it travels to
+              the new card with the highlight instead of disappearing */}
+          <motion.span
+            layoutId="current-turn"
+            layout="position"
+            transition={slide}
+            className="sr-only text-xs tracking-widest text-blue-800 uppercase lg:not-sr-only"
+          >
+            Current turn
+          </motion.span>
+        </div>
       )}
     </motion.div>
   );

@@ -42,7 +42,7 @@ export default function Start() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 py-20 sm:gap-19.5 sm:py-42.25 lg:py-38.5">
+    <div className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 pt-20 pb-29 sm:gap-19.5 sm:pt-42.25 sm:pb-42 lg:pt-38.5 lg:pb-45.75">
       <motion.header variants={fadeDown()} initial="hidden" animate="visible">
         <Logo className="max-sm:text-4xl" />
       </motion.header>
