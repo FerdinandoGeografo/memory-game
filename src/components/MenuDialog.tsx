@@ -1,15 +1,9 @@
-import useGame from "@/hooks/useGame";
-import { restartGame } from "@/game/actions";
+import useGameActions from "@/hooks/useGameActions";
 import { Button } from "@/ui/button";
 import { DialogContent, DialogClose, DialogTitle } from "@/ui/dialog";
-import { useNavigate } from "react-router";
 
 export default function MenuDialog({ open }: { open: boolean }) {
-  const navigate = useNavigate();
-  const {
-    state: { config },
-    dispatch,
-  } = useGame();
+  const { restart, newGame } = useGameActions();
 
   return (
     <DialogContent open={open} className="gap-4 p-6">
@@ -17,13 +11,7 @@ export default function MenuDialog({ open }: { open: boolean }) {
       <DialogTitle className="sr-only">Game menu</DialogTitle>
 
       <DialogClose
-        render={
-          <Button
-            size="lg"
-            className="w-full"
-            onClick={() => dispatch(restartGame(config.gridSize))}
-          />
-        }
+        render={<Button size="lg" className="w-full" onClick={restart} />}
       >
         Restart
       </DialogClose>
@@ -34,10 +22,7 @@ export default function MenuDialog({ open }: { open: boolean }) {
             size="lg"
             variant="secondary"
             className="w-full"
-            onClick={() => {
-              dispatch({ type: "quit" });
-              navigate("/start");
-            }}
+            onClick={newGame}
           />
         }
       >

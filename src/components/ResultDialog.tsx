@@ -1,5 +1,4 @@
-import useGame from "@/hooks/useGame";
-import { restartGame } from "@/game/actions";
+import useGameActions from "@/hooks/useGameActions";
 import useGameSummary from "@/hooks/useGameSummary";
 import {
   Dialog,
@@ -11,16 +10,11 @@ import {
 } from "@/ui/dialog";
 import { Button } from "@/ui/button";
 import { GameStat } from "./GameStat";
-import { useNavigate } from "react-router";
 
 const WINNER_HIGHLIGHT = { bg: "bg-blue-800", text: "text-white" };
 
 export default function ResultDialog() {
-  const {
-    state: { config },
-    dispatch,
-  } = useGame();
-  const navigate = useNavigate();
+  const { restart, newGame } = useGameActions();
   const summary = useGameSummary();
 
   const open = summary !== null;
@@ -52,7 +46,7 @@ export default function ResultDialog() {
         <DialogFooter className="sm:mt-4">
           <Button
             className="h-12 text-lg leading-5.5 sm:flex-1"
-            onClick={() => dispatch(restartGame(config.gridSize))}
+            onClick={restart}
           >
             Restart
           </Button>
@@ -60,10 +54,7 @@ export default function ResultDialog() {
           <Button
             variant="secondary"
             className="h-12 text-lg leading-5.5 sm:flex-1"
-            onClick={() => {
-              dispatch({ type: "quit" });
-              navigate("/start");
-            }}
+            onClick={newGame}
           >
             Setup New Game
           </Button>

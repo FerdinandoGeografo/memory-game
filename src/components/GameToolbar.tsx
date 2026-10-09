@@ -1,41 +1,32 @@
 import { Button } from "@/ui/button";
 import Logo from "./Logo";
 import useGame from "@/hooks/useGame";
-import { restartGame } from "@/game/actions";
-import { useNavigate } from "react-router";
+import useGameActions from "@/hooks/useGameActions";
 import { Dialog, DialogTrigger } from "@/ui/dialog";
 import MenuDialog from "./MenuDialog";
 
 export default function GameToolbar() {
-  const navigate = useNavigate();
   const {
-    state: { status, config },
-    dispatch,
+    state: { status },
   } = useGame();
+  const { restart, newGame, pause, resume } = useGameActions();
 
   const menuOpen = status === "paused";
-
-  function handleNewGame() {
-    dispatch({ type: "quit" });
-    navigate("/start");
-  }
 
   return (
     <header className="flex items-center justify-between gap-2">
       <Logo variant="dark" className="max-sm:text-xl max-sm:leading-7.5" />
 
       <div className="hidden items-center gap-4 sm:flex">
-        <Button onClick={() => dispatch(restartGame(config.gridSize))}>
-          Restart
-        </Button>
-        <Button variant="secondary" onClick={handleNewGame}>
+        <Button onClick={restart}>Restart</Button>
+        <Button variant="secondary" onClick={newGame}>
           New game
         </Button>
       </div>
 
       <Dialog
         open={menuOpen}
-        onOpenChange={(open) => dispatch({ type: open ? "pause" : "resume" })}
+        onOpenChange={(open) => (open ? pause() : resume())}
       >
         <DialogTrigger render={<Button className="sm:hidden" />}>
           Menu

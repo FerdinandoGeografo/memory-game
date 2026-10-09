@@ -6,29 +6,28 @@ import {
   THEME_OPTIONS,
 } from "@/constants/game-options";
 import useGame from "@/hooks/useGame";
-import { startGame } from "@/game/actions";
+import useGameActions from "@/hooks/useGameActions";
 import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
-import { useNavigate } from "react-router";
 import { motion } from "motion/react";
 import { useEffect } from "react";
 
 export default function Start() {
-  const navigate = useNavigate();
   const {
     state: { config },
     dispatch,
   } = useGame();
+  const { start } = useGameActions();
 
-  // Coming back here (e.g. browser Back) pauses a game in progress
+  // Coming back here (e.g. browser Back) pauses a game in progress.
+  // dispatch is stable, so this runs once per visit.
   useEffect(() => {
     dispatch({ type: "pause" });
   }, [dispatch]);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch(startGame(config.gridSize));
-    navigate("/game");
+    start();
   }
 
   function setConfig(config: Partial<GameConfig>) {
