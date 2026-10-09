@@ -1,6 +1,5 @@
 import { motion, type Variants } from "motion/react";
-import type { Tile } from "@/types/game";
-import useGame from "@/hooks/useGame";
+import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TILE_ICONS } from "@/constants/tile-icons";
 
@@ -20,19 +19,22 @@ const tileVariants: Variants = {
   },
 };
 
+// Props only, no Context: the timer's tick re-renders the board, not every tile
 interface TileProps {
   tile: Tile;
   index: number;
+  gridSize: GridSize;
+  theme: GameTheme;
+  onSelect: (tileId: Tile["id"]) => void;
 }
 
-export default function Tile({ tile, index }: TileProps) {
-  const {
-    state: {
-      config: { gridSize, theme },
-    },
-    dispatch,
-  } = useGame();
-
+export default function Tile({
+  tile,
+  index,
+  gridSize,
+  theme,
+  onSelect,
+}: TileProps) {
   const columns = gridSize === "4x4" ? 4 : 6;
   const position = `Row ${Math.floor(index / columns) + 1}, column ${(index % columns) + 1}`;
   const valueName =
@@ -51,9 +53,7 @@ export default function Tile({ tile, index }: TileProps) {
         aria-label={label}
         aria-disabled={!isCovered}
         className="group block size-full rounded-full perspective-distant focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 aria-disabled:cursor-default"
-        onClick={() =>
-          dispatch({ type: "selectTile", payload: { tileId: tile.id } })
-        }
+        onClick={() => onSelect(tile.id)}
       >
         <motion.span
           aria-hidden="true"

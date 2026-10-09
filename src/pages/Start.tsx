@@ -7,6 +7,7 @@ import {
 } from "@/constants/game-options";
 import useGame from "@/hooks/useGame";
 import useGameActions from "@/hooks/useGameActions";
+import { loadGamePage } from "@/pages/load-game-page";
 import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
 import { motion } from "motion/react";
@@ -24,6 +25,11 @@ export default function Start() {
   useEffect(() => {
     dispatch({ type: "pause" });
   }, [dispatch]);
+
+  // Fetch the game page in the background, so Start Game doesn't wait for it
+  useEffect(() => {
+    void loadGamePage();
+  }, []);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
