@@ -30,7 +30,7 @@ export default function Start() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 py-20 sm:gap-19.5 sm:px-0 sm:py-42.25 lg:py-38.5">
+    <div className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 py-20 sm:gap-19.5 sm:py-42.25 lg:py-38.5">
       <motion.header
         initial={{ opacity: 0, y: -24 }}
         animate={{ opacity: 1, y: 0 }}

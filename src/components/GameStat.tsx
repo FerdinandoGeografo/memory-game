@@ -42,6 +42,8 @@ const valueVariants = cva("text-xl leading-7.5 text-blue-700", {
 
 interface GameStatProps extends VariantProps<typeof statVariants> {
   name: string;
+  // Visible on mobile instead of name; name stays available to screen readers
+  shortName?: string;
   value: string;
   highlight?: {
     bg: string;
@@ -52,6 +54,7 @@ interface GameStatProps extends VariantProps<typeof statVariants> {
 
 export function GameStat({
   name,
+  shortName,
   value,
   highlight,
   variant,
@@ -60,7 +63,16 @@ export function GameStat({
   return (
     <div className={cn(statVariants({ variant }), highlight?.bg, className)}>
       <span className={cn(labelVariants({ variant }), highlight?.text)}>
-        {name}
+        {shortName ? (
+          <>
+            <span aria-hidden="true" className="sm:hidden">
+              {shortName}
+            </span>
+            <span className="max-sm:sr-only">{name}</span>
+          </>
+        ) : (
+          name
+        )}
       </span>
       <span className={cn(valueVariants({ variant }), highlight?.text)}>
         {value}

@@ -60,6 +60,7 @@ export default function Game() {
                       : undefined
                   }
                   name={`player ${player.id}`}
+                  shortName={`P${player.id}`}
                   value={player.score.toString()}
                 />
 
