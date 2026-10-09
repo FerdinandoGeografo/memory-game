@@ -1,10 +1,12 @@
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
+import { motion, type Variants } from "motion/react";
 
+import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center capitalize justify-center rounded-full border border-transparent bg-clip-padding leading-5 sm:text-xl sm:leading-6.25 whitespace-nowrap transition-all duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 items-center capitalize justify-center rounded-full border border-transparent bg-clip-padding leading-5 sm:text-xl sm:leading-6.25 whitespace-nowrap transition-[color,background-color,border-color,box-shadow] duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -25,16 +27,28 @@ const buttonVariants = cva(
   },
 );
 
+// Grows on hover and presses in on tap. `variants` lets a parent stagger its
+// entrance (see lib/motion/variants).
 function Button({
   className,
   variant = "default",
   size = "default",
+  variants,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & { variants?: Variants }) {
   return (
     <ButtonPrimitive
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      render={
+        <motion.button
+          variants={variants}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+          transition={quickSpring}
+        />
+      }
       {...props}
     />
   );
