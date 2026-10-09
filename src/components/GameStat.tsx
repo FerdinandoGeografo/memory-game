@@ -53,16 +53,17 @@ const valueVariants = cva(
   },
 );
 
+const HIGHLIGHTS = {
+  turn: { bg: "bg-orange-500", text: "text-white" },
+  winner: { bg: "bg-blue-800", text: "text-white" },
+} as const;
+
 interface GameStatProps extends VariantProps<typeof statVariants> {
   name: string;
   // Visible on mobile instead of name; name stays available to screen readers
   shortName?: string;
   value: string;
-  highlight?: {
-    bg: string;
-    text: string;
-  };
-  className?: string;
+  highlight?: keyof typeof HIGHLIGHTS;
 }
 
 export function GameStat({
@@ -71,17 +72,18 @@ export function GameStat({
   value,
   highlight,
   variant,
-  className,
 }: GameStatProps) {
+  const tone = highlight ? HIGHLIGHTS[highlight] : undefined;
+
   return (
-    <div className={cn(statVariants({ variant }), className)}>
+    <div className={statVariants({ variant })}>
       {/* The highlight slides in from the left and leaves to the right;
           no animation on first render (first player, winner rows) */}
       <AnimatePresence initial={false}>
-        {highlight && (
+        {tone && (
           <motion.span
             aria-hidden="true"
-            className={cn("absolute inset-0 -z-10", highlight.bg)}
+            className={cn("absolute inset-0 -z-10", tone.bg)}
             // x (not a transform string) so MotionConfig reduced motion applies
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
@@ -91,7 +93,7 @@ export function GameStat({
         )}
       </AnimatePresence>
 
-      <span className={cn(labelVariants({ variant }), highlight?.text)}>
+      <span className={cn(labelVariants({ variant }), tone?.text)}>
         {shortName ? (
           <>
             <span aria-hidden="true" className="sm:hidden">
@@ -103,7 +105,7 @@ export function GameStat({
           name
         )}
       </span>
-      <span className={cn(valueVariants({ variant }), highlight?.text)}>
+      <span className={cn(valueVariants({ variant }), tone?.text)}>
         {value}
       </span>
     </div>

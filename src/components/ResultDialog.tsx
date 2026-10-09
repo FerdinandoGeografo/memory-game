@@ -11,8 +11,6 @@ import {
 import { Button } from "@/ui/button";
 import { GameStat } from "./GameStat";
 
-const WINNER_HIGHLIGHT = { bg: "bg-blue-800", text: "text-white" };
-
 export default function ResultDialog() {
   const { restart, newGame } = useGameActions();
   const summary = useGameSummary();
@@ -38,7 +36,7 @@ export default function ResultDialog() {
               key={stat.name}
               name={stat.name}
               value={stat.value}
-              highlight={stat.isWinner ? WINNER_HIGHLIGHT : undefined}
+              highlight={stat.isWinner ? "winner" : undefined}
             />
           ))}
         </div>
