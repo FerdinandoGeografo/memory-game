@@ -6,7 +6,7 @@ import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center capitalize justify-center rounded-full border border-transparent bg-clip-padding leading-5 sm:text-xl sm:leading-6.25 whitespace-nowrap transition-[color,background-color,border-color,box-shadow] duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 items-center capitalize justify-center rounded-full leading-5 sm:text-xl sm:leading-6.25 whitespace-nowrap transition-[color,background-color,border-color,box-shadow] duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {

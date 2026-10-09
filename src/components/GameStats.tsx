@@ -2,14 +2,14 @@ import { AnimatePresence, motion } from "motion/react";
 import { GameStat } from "@/components/GameStat";
 import useGame from "@/hooks/useGame";
 import { leave, quickSpring, slide } from "@/lib/motion/transitions";
-import { fadeUp, staggerChildren } from "@/lib/motion/variants";
+import { fadeDown, staggerChildren } from "@/lib/motion/variants";
 import { cn } from "@/lib/utils";
 import type { Player } from "@/types/game";
 import { formatTime } from "@/utils/helpers";
 
 // The stats come in one by one while the board's wave is ending
 const statsVariants = staggerChildren(0.08, 0.5);
-const cardVariants = fadeUp();
+const cardVariants = fadeDown();
 
 function PlayerCard({
   player,
