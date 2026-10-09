@@ -4,6 +4,7 @@ import { GameStat } from "@/components/GameStat";
 import GameToolbar from "@/components/GameToolbar";
 import ResultDialog from "@/components/ResultDialog";
 import useGame from "@/hooks/useGame";
+import { cn } from "@/lib/utils";
 import { formatTime } from "@/utils/helpers";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
@@ -28,7 +29,13 @@ export default function Game() {
         <GameBoard />
         <GameAnnouncer />
 
-        <div className="flex gap-6.25 sm:gap-7.5">
+        <div
+          className={cn(
+            "flex gap-6.25 sm:gap-7.5",
+            // Solo stats are a centred 540px group from tablet up
+            !isMulti && "sm:mx-auto sm:w-full sm:max-w-135",
+          )}
+        >
           {isMulti ? (
             players.map((player, i) => (
               <div
