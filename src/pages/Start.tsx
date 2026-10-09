@@ -11,6 +11,7 @@ import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
+import { useEffect } from "react";
 
 export default function Start() {
   const navigate = useNavigate();
@@ -18,6 +19,11 @@ export default function Start() {
     state: { config },
     dispatch,
   } = useGame();
+
+  // Coming back here (e.g. browser Back) pauses a game in progress
+  useEffect(() => {
+    dispatch({ type: "pause" });
+  }, [dispatch]);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
