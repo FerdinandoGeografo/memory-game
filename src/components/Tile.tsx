@@ -89,8 +89,10 @@ export default function Tile({
             {theme === "numbers" ? (
               tile.value
             ) : (
+              // A share of the tile, as in Figma (40px in an 82px tile), so
+              // icons scale with the fluid board on every grid and viewport
               <FontAwesomeIcon
-                className={`${gridSize === "4x4" ? "size-8! sm:size-14!" : "size-8! sm:size-10!"}`}
+                className="size-[48%]!"
                 icon={TILE_ICONS[tile.value]}
               />
             )}
