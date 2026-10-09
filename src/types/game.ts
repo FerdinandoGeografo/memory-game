@@ -30,6 +30,8 @@ export interface GameState {
   players: Player[];
   currentPlayerIndex: number;
   isChecking: boolean;
+  // Outcome of the last resolved pair in this round, for announcements
+  lastMatch: boolean | null;
   moves: number;
   elapsedSeconds: number;
   roundId: number;

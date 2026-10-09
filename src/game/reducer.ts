@@ -9,6 +9,7 @@ export const initialState: GameState = {
   players: [],
   currentPlayerIndex: 0,
   isChecking: false,
+  lastMatch: null,
   moves: 0,
   elapsedSeconds: 0,
   roundId: 0,
@@ -83,6 +84,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         board,
         players,
         isChecking: false,
+        lastMatch: match,
         status: isComplete ? "finished" : "playing",
         currentPlayerIndex: match
           ? state.currentPlayerIndex

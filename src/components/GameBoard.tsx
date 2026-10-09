@@ -24,10 +24,11 @@ export default function GameBoard() {
         initial="hidden"
         animate="visible"
         exit="hidden"
+        aria-label="Game board"
         className={`mt-20 mb-25.25 grid self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-26.25 sm:mb-30.5 sm:gap-5" : "grid-cols-6 gap-2.25 sm:mt-21.25 sm:mb-25.5 sm:gap-4"}`}
       >
-        {board.map((tile) => (
-          <Tile key={tile.id} tile={tile} />
+        {board.map((tile, index) => (
+          <Tile key={tile.id} tile={tile} index={index} />
         ))}
       </motion.ul>
     </AnimatePresence>

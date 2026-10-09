@@ -1,3 +1,4 @@
+import GameAnnouncer from "@/components/GameAnnouncer";
 import GameBoard from "@/components/GameBoard";
 import { GameStat } from "@/components/GameStat";
 import GameToolbar from "@/components/GameToolbar";
@@ -25,6 +26,7 @@ export default function Game() {
         <GameToolbar />
 
         <GameBoard />
+        <GameAnnouncer />
 
         <div className="flex gap-6.25 sm:gap-7.5">
           {isMulti ? (
@@ -52,7 +54,7 @@ export default function Game() {
                 />
 
                 {currentPlayerIndex === i && (
-                  <span className="hidden text-xs leading-4 tracking-widest text-blue-800 uppercase sm:block">
+                  <span className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase sm:not-sr-only sm:block">
                     Current turn
                   </span>
                 )}
