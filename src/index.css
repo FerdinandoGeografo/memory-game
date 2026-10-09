@@ -43,15 +43,32 @@
   --radius-lg: 10px;
   --radius-xl: 20px;
 
-  --text-xs: 0.8125rem;
-  --text-sm: 0.9375rem;
-  --text-xl: 1.5rem;
-  --text-2xl: 1.625rem;
-  --text-3xl: 2rem;
-  --text-4xl: 2.5rem;
-  --text-5xl: 2.75rem;
-  --text-6xl: 3rem;
-  --text-7xl: 3.5rem;
+  /* Figma type scale (px in comments); each size carries its line-height,
+     so a leading-* class is needed only where the design differs */
+  --text-xs: 0.8125rem; /* 13/16 */
+  --text-xs--line-height: 1rem;
+  --text-sm: 0.9375rem; /* 15/19 */
+  --text-sm--line-height: 1.1875rem;
+  --text-base: 1rem; /* 16/20 */
+  --text-base--line-height: 1.25rem;
+  --text-lg: 1.125rem; /* 18/22 */
+  --text-lg--line-height: 1.375rem;
+  --text-xl: 1.25rem; /* 20/25 */
+  --text-xl--line-height: 1.5625rem;
+  --text-2xl: 1.5rem; /* 24/30 */
+  --text-2xl--line-height: 1.875rem;
+  --text-3xl: 1.625rem; /* 26/32 */
+  --text-3xl--line-height: 2rem;
+  --text-4xl: 2rem; /* 32/40 */
+  --text-4xl--line-height: 2.5rem;
+  --text-5xl: 2.5rem; /* 40/50 */
+  --text-5xl--line-height: 3.125rem;
+  --text-6xl: 2.75rem; /* 44/55 */
+  --text-6xl--line-height: 3.4375rem;
+  --text-7xl: 3rem; /* 48/60 */
+  --text-7xl--line-height: 3.75rem;
+  --text-8xl: 3.5rem; /* 56/70 */
+  --text-8xl--line-height: 4.375rem;
 
   --container-2xl: 40.875rem;
   --container-7xl: 90rem;

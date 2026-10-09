@@ -50,7 +50,7 @@ export default function ResultDialog() {
 
         <DialogFooter variants={staggerChildren(0.08, 0.2)} className="sm:mt-4">
           <Button
-            className="h-12 text-lg leading-5.5 sm:flex-1"
+            className="h-12 text-lg sm:flex-1"
             onClick={restart}
             variants={fadeUp()}
           >
@@ -59,7 +59,7 @@ export default function ResultDialog() {
 
           <Button
             variant="secondary"
-            className="h-12 text-lg leading-5.5 sm:flex-1"
+            className="h-12 text-lg sm:flex-1"
             onClick={newGame}
             variants={fadeUp()}
           >

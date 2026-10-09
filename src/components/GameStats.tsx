@@ -63,7 +63,7 @@ function PlayerCard({
           layoutId="current-turn"
           layout="position"
           transition={slide}
-          className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block"
+          className="sr-only text-xs tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block"
         >
           Current turn
         </motion.span>

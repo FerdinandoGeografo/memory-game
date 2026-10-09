@@ -84,7 +84,7 @@ export default function Tile({
         >
           <span className="absolute inset-0 rounded-full bg-blue-700 transition-colors duration-300 backface-hidden group-hover:bg-blue-500" />
           <span
-            className={`absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors duration-300 backface-hidden ${tile.state === "flipped" ? "bg-orange-500" : "bg-blue-200"} ${gridSize === "4x4" ? "text-4xl leading-15 sm:text-7xl" : "text-xl leading-7.5 sm:text-5xl sm:leading-15"}`}
+            className={`absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors duration-300 backface-hidden ${tile.state === "flipped" ? "bg-orange-500" : "bg-blue-200"} ${gridSize === "4x4" ? "text-5xl leading-15 sm:text-8xl" : "text-2xl sm:text-6xl sm:leading-15"}`}
           >
             {theme === "numbers" ? (
               tile.value

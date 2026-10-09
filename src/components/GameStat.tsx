@@ -27,32 +27,29 @@ const textTransition =
   "transition-colors duration-300 motion-reduce:transition-none";
 
 const labelVariants = cva(
-  `text-sm leading-4.75 text-blue-600 capitalize ${textTransition}`,
+  `text-sm text-blue-600 capitalize ${textTransition}`,
   {
     variants: {
       variant: {
-        solo: "sm:mt-2 sm:text-lg sm:leading-5.5",
-        player: "lg:mt-2 lg:text-lg lg:leading-5.5",
-        result: "text-xs leading-4 sm:mt-2 sm:text-lg sm:leading-5.5",
+        solo: "sm:mt-2 sm:text-lg",
+        player: "lg:mt-2 lg:text-lg",
+        result: "text-xs sm:mt-2 sm:text-lg",
       },
     },
     defaultVariants: { variant: "solo" },
   },
 );
 
-const valueVariants = cva(
-  `text-xl leading-7.5 text-blue-700 ${textTransition}`,
-  {
-    variants: {
-      variant: {
-        solo: "sm:text-3xl sm:leading-10",
-        player: "lg:text-3xl lg:leading-10",
-        result: "text-[20px] leading-7 sm:text-3xl sm:leading-10",
-      },
+const valueVariants = cva(`text-2xl text-blue-700 ${textTransition}`, {
+  variants: {
+    variant: {
+      solo: "sm:text-4xl",
+      player: "lg:text-4xl",
+      result: "text-xl/7 sm:text-4xl",
     },
-    defaultVariants: { variant: "solo" },
   },
-);
+  defaultVariants: { variant: "solo" },
+});
 
 const HIGHLIGHTS = {
   turn: { bg: "bg-orange-500", text: "text-white" },

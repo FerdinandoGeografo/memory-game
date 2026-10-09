@@ -15,7 +15,7 @@ export default function GameToolbar() {
 
   return (
     <header className="flex items-center justify-between gap-2">
-      <Logo variant="dark" className="max-sm:text-xl max-sm:leading-7.5" />
+      <Logo variant="dark" className="max-sm:text-2xl" />
 
       <div className="hidden items-center gap-4 sm:flex">
         <Button onClick={restart}>Restart</Button>

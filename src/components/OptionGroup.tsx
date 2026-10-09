@@ -32,7 +32,7 @@ export default function OptionGroup<T extends string>({
   return (
     // Enters with its parent's stagger, then pops its options in one by one
     <motion.fieldset variants={fadeUp({ step: 0.05, startDelay: 0.05 })}>
-      <legend className="mb-2.75 text-sm leading-4.75 text-blue-600 sm:mb-4 sm:text-xl sm:leading-6.25">
+      <legend className="mb-2.75 text-sm text-blue-600 sm:mb-4 sm:text-xl">
         {label}
       </legend>
 
