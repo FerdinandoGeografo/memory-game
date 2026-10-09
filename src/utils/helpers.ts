@@ -9,10 +9,6 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
-export function pickRandomItems<T>(pool: T[], count: number): T[] {
-  return shuffle(pool).slice(0, count);
-}
-
 export function generateBoard(gridSize: GridSize): Tile[] {
   const dim = gridSize === "4x4" ? 4 : 6;
   const pairsCount = (dim * dim) / 2;

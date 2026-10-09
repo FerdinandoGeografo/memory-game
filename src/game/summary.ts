@@ -51,7 +51,8 @@ export function getGameSummary({
     title: winners.length > 1 ? "It’s a tie!" : `Player ${winners[0].id} Wins!`,
     description: "Game over! Here are the results…",
     stats: ranked.map((p) => ({
-      name: `Player ${p.id} ${p.score === topScore ? "(Winner!)" : ""}`,
+      name:
+        p.score === topScore ? `Player ${p.id} (Winner!)` : `Player ${p.id}`,
       value: `${p.score} Pairs`,
       isWinner: p.score === topScore,
     })),

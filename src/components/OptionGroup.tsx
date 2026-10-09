@@ -39,7 +39,7 @@ export default function OptionGroup<T extends string>({
           const option = options.find((o) => o.value === next[0]);
           if (option) onChange(option.value);
         }}
-        className={`gap-2.5 ${gapCls}`}
+        className={gapCls}
       >
         {options.map((option) => (
           <ToggleGroupItem key={option.value} value={option.value}>
