@@ -1,0 +1,63 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Atkinson Hyperlegible";
+  src: url("/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+@theme {
+  --font-sans: "Atkinson Hyperlegible", sans-serif;
+  
+  --color-neutral-100: #fcfcfc;
+  --color-neutral-200: #f2f2f2;
+
+  --color-orange-300: #FFB84A;
+  --color-orange-500: #fda214;
+
+  --color-blue-200: #bcced9;
+  --color-blue-300: #DFE7EC;
+  --color-blue-500: #6395b8;
+  --color-blue-600: #7191a5;
+  --color-blue-700: #304859;
+  --color-blue-800: #152938;
+
+  --radius-sm: 5px;
+  --radius-lg: 10px;
+  --radius-xl: 20px;
+
+  --text-xs: 0.8125rem;
+  --text-sm: 0.9375rem;
+  --text-xl: 1.5rem;
+  --text-2xl: 1.625rem;
+  --text-3xl: 2rem;
+  --text-4xl: 2.5rem;
+  --text-5xl: 2.75rem;
+  --text-6xl: 3rem;
+  --text-7xl: 3.5rem;
+
+  --container-2xl: 40.875rem;
+  --container-7xl: 90rem;
+
+  --tracking-widest: 5px;
+}
