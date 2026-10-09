@@ -48,7 +48,7 @@ export function getGameSummary({
   const winners = ranked.filter((p) => p.score === topScore);
 
   return {
-    title: winners.length > 1 ? "It's a tie!" : `Player ${winners[0].id} Wins!`,
+    title: winners.length > 1 ? "It’s a tie!" : `Player ${winners[0].id} Wins!`,
     description: "Game over! Here are the results…",
     stats: ranked.map((p) => ({
       name: `Player ${p.id} ${p.score === topScore ? "(Winner!)" : ""}`,

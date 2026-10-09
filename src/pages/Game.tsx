@@ -31,9 +31,11 @@ export default function Game() {
 
         <div
           className={cn(
-            "flex gap-6.25 sm:gap-7.5",
-            // Solo stats are a centred 540px group from tablet up
-            !isMulti && "sm:mx-auto sm:w-full sm:max-w-135",
+            "flex",
+            isMulti
+              ? "gap-6 sm:gap-2.75 lg:gap-7.5"
+              : // Solo stats are a centred 540px group from tablet up
+                "gap-6.25 sm:mx-auto sm:w-full sm:max-w-135 sm:gap-7.5",
           )}
         >
           {isMulti ? (
@@ -46,11 +48,12 @@ export default function Game() {
                   <div
                     style={{ clipPath: "polygon(0% 100%, 50% 0%, 100% 100%)" }}
                     aria-hidden="true"
-                    className="absolute top-0 left-1/2 h-2 w-4 -translate-x-1/2 -translate-y-full bg-orange-500 sm:h-5 sm:w-10"
+                    className="absolute top-0 left-1/2 h-2 w-4 -translate-x-1/2 -translate-y-full bg-orange-500 sm:h-3 sm:w-6 lg:h-5 lg:w-10"
                   ></div>
                 )}
 
                 <GameStat
+                  variant="player"
                   highlight={
                     currentPlayerIndex === i
                       ? { bg: "bg-orange-500", text: "text-white" }
@@ -61,7 +64,7 @@ export default function Game() {
                 />
 
                 {currentPlayerIndex === i && (
-                  <span className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase sm:not-sr-only sm:block">
+                  <span className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block">
                     Current turn
                   </span>
                 )}

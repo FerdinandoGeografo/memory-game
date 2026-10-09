@@ -40,7 +40,7 @@ export default function ResultDialog() {
         <div className="flex flex-col gap-2 sm:gap-4">
           {summary?.stats.map((stat) => (
             <GameStat
-              className="flex-row items-start justify-between gap-2 rounded-lg"
+              variant="result"
               key={stat.name}
               name={stat.name}
               value={stat.value}
@@ -51,7 +51,7 @@ export default function ResultDialog() {
 
         <DialogFooter className="sm:mt-4">
           <Button
-            className="sm:flex-1"
+            className="h-12 text-lg leading-5.5 sm:flex-1"
             onClick={() => dispatch(restartGame(config.gridSize))}
           >
             Restart
@@ -59,7 +59,7 @@ export default function ResultDialog() {
 
           <Button
             variant="secondary"
-            className="sm:flex-1"
+            className="h-12 text-lg leading-5.5 sm:flex-1"
             onClick={() => {
               dispatch({ type: "quit" });
               navigate("/start");
