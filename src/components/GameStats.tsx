@@ -1,8 +1,15 @@
+import { AnimatePresence, motion } from "motion/react";
 import { GameStat } from "@/components/GameStat";
 import useGame from "@/hooks/useGame";
+import { leave, quickSpring, slide } from "@/lib/motion/transitions";
+import { fadeUp, staggerChildren } from "@/lib/motion/variants";
 import { cn } from "@/lib/utils";
 import type { Player } from "@/types/game";
 import { formatTime } from "@/utils/helpers";
+
+// The stats come in one by one while the board's wave is ending
+const statsVariants = staggerChildren(0.08, 0.5);
+const cardVariants = fadeUp();
 
 function PlayerCard({
   player,
@@ -14,14 +21,32 @@ function PlayerCard({
   return (
     // From desktop a card stops at the Figma width (255px) and the group centres,
     // so two players line up like the solo stats
-    <div className="relative flex flex-1 flex-col items-center gap-5.75 lg:max-w-63.75">
-      {isCurrent && (
-        <div
-          style={{ clipPath: "polygon(0% 100%, 50% 0%, 100% 100%)" }}
-          aria-hidden="true"
-          className="absolute top-0 left-1/2 h-2 w-4 -translate-x-1/2 -translate-y-full bg-orange-500 sm:h-3 sm:w-6 lg:h-5 lg:w-10"
-        />
-      )}
+    <motion.div
+      variants={cardVariants}
+      className="relative flex flex-1 flex-col items-center gap-5.75 lg:max-w-63.75"
+    >
+      {/* No animation for the first player: it enters with its card */}
+      <AnimatePresence initial={false}>
+        {isCurrent && (
+          // The marker rises out of the card's top edge once the highlight
+          // has slid in, and drops back as the turn passes
+          <div
+            aria-hidden="true"
+            className="absolute top-0 left-1/2 h-2 w-4 -translate-x-1/2 -translate-y-full overflow-hidden sm:h-3 sm:w-6 lg:h-5 lg:w-10"
+          >
+            <motion.div
+              style={{ clipPath: "polygon(0% 100%, 50% 0%, 100% 100%)" }}
+              className="size-full bg-orange-500"
+              initial={{ y: "100%" }}
+              animate={{
+                y: 0,
+                transition: { ...quickSpring, delay: slide.duration },
+              }}
+              exit={{ y: "100%", transition: leave }}
+            />
+          </div>
+        )}
+      </AnimatePresence>
 
       <GameStat
         variant="player"
@@ -32,11 +57,18 @@ function PlayerCard({
       />
 
       {isCurrent && (
-        <span className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block">
+        // One label shared by the cards: on a turn change it travels to the
+        // new card with the highlight instead of disappearing
+        <motion.span
+          layoutId="current-turn"
+          layout="position"
+          transition={slide}
+          className="sr-only text-xs leading-4 tracking-widest text-blue-800 uppercase lg:not-sr-only lg:block"
+        >
           Current turn
-        </span>
+        </motion.span>
       )}
-    </div>
+    </motion.div>
   );
 }
 
@@ -49,7 +81,10 @@ export default function GameStats() {
   const isMulti = players.length > 1;
 
   return (
-    <div
+    <motion.div
+      variants={statsVariants}
+      initial="hidden"
+      animate="visible"
       className={cn(
         "flex",
         isMulti
@@ -68,10 +103,18 @@ export default function GameStats() {
         ))
       ) : (
         <>
-          <GameStat name="time" value={formatTime(elapsedSeconds)} />
-          <GameStat name="moves" value={moves.toString()} />
+          <GameStat
+            name="time"
+            value={formatTime(elapsedSeconds)}
+            variants={cardVariants}
+          />
+          <GameStat
+            name="moves"
+            value={moves.toString()}
+            variants={cardVariants}
+          />
         </>
       )}
-    </div>
+    </motion.div>
   );
 }

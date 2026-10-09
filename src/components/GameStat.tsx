@@ -1,5 +1,6 @@
 import { cva, type VariantProps } from "class-variance-authority";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, type Variants } from "motion/react";
+import { slide } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
 // One variant per Figma use case: solo stats, player cards, result rows
@@ -64,6 +65,8 @@ interface GameStatProps extends VariantProps<typeof statVariants> {
   shortName?: string;
   value: string;
   highlight?: keyof typeof HIGHLIGHTS;
+  // Entrance driven by a staggering parent
+  variants?: Variants;
 }
 
 export function GameStat({
@@ -72,11 +75,12 @@ export function GameStat({
   value,
   highlight,
   variant,
+  variants,
 }: GameStatProps) {
   const tone = highlight ? HIGHLIGHTS[highlight] : undefined;
 
   return (
-    <div className={statVariants({ variant })}>
+    <motion.div variants={variants} className={statVariants({ variant })}>
       {/* The highlight slides in from the left and leaves to the right;
           no animation on first render (first player, winner rows) */}
       <AnimatePresence initial={false}>
@@ -88,7 +92,7 @@ export function GameStat({
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
-            transition={{ duration: 0.35, ease: "easeInOut" }}
+            transition={slide}
           />
         )}
       </AnimatePresence>
@@ -108,6 +112,6 @@ export function GameStat({
       <span className={cn(valueVariants({ variant }), tone?.text)}>
         {value}
       </span>
-    </div>
+    </motion.div>
   );
 }
