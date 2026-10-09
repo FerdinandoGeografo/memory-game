@@ -18,7 +18,10 @@ export default function GameToolbar() {
       <Logo variant="dark" className="max-sm:text-2xl" />
 
       <div className="hidden items-center gap-4 sm:flex">
-        <Button onClick={restart}>Restart</Button>
+        {/* Figma gives Restart a 127px width, wider than its text */}
+        <Button className="min-w-31.75" onClick={restart}>
+          Restart
+        </Button>
         <Button variant="secondary" onClick={newGame}>
           New game
         </Button>
