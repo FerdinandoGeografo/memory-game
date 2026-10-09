@@ -1,7 +1,7 @@
 import useGame from "@/hooks/useGame";
 import { restartGame } from "@/game/actions";
 import { Button } from "@/ui/button";
-import { DialogContent, DialogClose } from "@/ui/dialog";
+import { DialogContent, DialogClose, DialogTitle } from "@/ui/dialog";
 import { useNavigate } from "react-router";
 
 export default function MenuDialog({ open }: { open: boolean }) {
@@ -13,6 +13,9 @@ export default function MenuDialog({ open }: { open: boolean }) {
 
   return (
     <DialogContent open={open} className="gap-4 p-6">
+      {/* The design has no visible title; keep an accessible name */}
+      <DialogTitle className="sr-only">Game menu</DialogTitle>
+
       <DialogClose
         render={
           <Button

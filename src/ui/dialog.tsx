@@ -39,7 +39,8 @@ function DialogContent({
             }
           />
 
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-6">
+          {/* Grid centering keeps a tall popup scrollable from its top edge */}
+          <DialogPrimitive.Viewport className="fixed inset-0 z-50 grid place-items-center overflow-y-auto p-6">
             <DialogPrimitive.Popup
               data-slot="dialog-content"
               className={cn(
@@ -58,7 +59,7 @@ function DialogContent({
             >
               {children}
             </DialogPrimitive.Popup>
-          </div>
+          </DialogPrimitive.Viewport>
         </DialogPrimitive.Portal>
       )}
     </AnimatePresence>

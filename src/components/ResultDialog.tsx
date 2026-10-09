@@ -28,7 +28,8 @@ export default function ResultDialog() {
   return (
     <Dialog
       open={open}
-      onOpenChange={() => dispatch(restartGame(config.gridSize))}
+      // Results close only through Restart or Setup New Game
+      onOpenChange={(_open, details) => details.cancel()}
     >
       <DialogContent open={open}>
         <DialogHeader>
