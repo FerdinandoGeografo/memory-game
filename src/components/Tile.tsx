@@ -42,12 +42,8 @@ export default function Tile({ tile, index }: TileProps) {
     : `${position}, ${valueName}, ${tile.state === "matched" ? "matched" : "revealed"}`;
 
   return (
-    <motion.li
-      variants={tileVariants}
-      className={
-        gridSize === "4x4" ? "size-18 sm:size-29.5" : "size-11.75 sm:size-20.5"
-      }
-    >
+    // The grid column sets the width; the tile stays a circle at any size
+    <motion.li variants={tileVariants} className="aspect-square">
       {/* The button never rotates, so focus stays visible on both faces */}
       <button
         type="button"

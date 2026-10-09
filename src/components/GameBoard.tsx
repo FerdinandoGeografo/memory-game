@@ -25,7 +25,8 @@ export default function GameBoard() {
         animate="visible"
         exit="hidden"
         aria-label="Game board"
-        className={`mt-20 mb-25.25 grid self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-26.25 sm:mb-30.5 sm:gap-5" : "grid-cols-6 gap-2.25 sm:mt-21.25 sm:mb-25.5 sm:gap-4"}`}
+        // Fluid width capped at the Figma size: 327px mobile, 532/572px from tablet
+        className={`mt-20 mb-25.25 grid w-full max-w-81.75 self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-39.25 sm:mb-31.5 sm:max-w-133 sm:gap-5 lg:mt-26.25 lg:mb-30.5" : "grid-cols-6 gap-2.25 sm:mt-30.25 sm:mb-30.5 sm:max-w-143 sm:gap-4 lg:mt-21.25 lg:mb-25.5"}`}
       >
         {board.map((tile, index) => (
           <Tile key={tile.id} tile={tile} index={index} />
