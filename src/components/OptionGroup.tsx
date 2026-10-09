@@ -34,7 +34,11 @@ export default function OptionGroup<T extends string>({
 
       <ToggleGroup
         value={[value]}
-        onValueChange={(value: string[]) => onChange(value[0] as T)}
+        onValueChange={(next: string[]) => {
+          // Required single choice: ignore deselection and unknown values
+          const option = options.find((o) => o.value === next[0]);
+          if (option) onChange(option.value);
+        }}
         className={`gap-2.5 ${gapCls}`}
       >
         {options.map((option) => (
