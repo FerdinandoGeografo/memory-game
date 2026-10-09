@@ -111,7 +111,10 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       // Keep roundId increasing so a new round never reuses an old identity
       return { ...initialState, config: state.config, roundId: state.roundId };
 
-    default:
-      throw new Error("Action type is unknown");
+    default: {
+      // Compile-time check: every GameAction must be handled above
+      const unhandled: never = action;
+      throw new Error(`Unknown action: ${JSON.stringify(unhandled)}`);
+    }
   }
 }

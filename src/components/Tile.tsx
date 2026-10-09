@@ -4,6 +4,22 @@ import useGame from "@/hooks/useGame";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TILE_ICONS } from "@/constants/tile-icons";
 
+// Driven by the board's stagger (GameBoard)
+const tileVariants: Variants = {
+  hidden: {
+    opacity: 0,
+    scale: 0.6,
+    y: "-100%",
+    transition: { duration: 0.05, ease: "easeIn" },
+  },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { duration: 0.15, ease: "easeOut" },
+  },
+};
+
 interface TileProps {
   tile: Tile;
   index: number;
@@ -16,21 +32,6 @@ export default function Tile({ tile, index }: TileProps) {
     },
     dispatch,
   } = useGame();
-
-  const tileVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      scale: 0.6,
-      y: "-100%",
-      transition: { duration: 0.05, ease: "easeIn" },
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: { duration: 0.15, ease: "easeOut" },
-    },
-  };
 
   const columns = gridSize === "4x4" ? 4 : 6;
   const position = `Row ${Math.floor(index / columns) + 1}, column ${(index % columns) + 1}`;
