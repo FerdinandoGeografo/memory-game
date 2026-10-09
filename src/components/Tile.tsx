@@ -69,7 +69,7 @@ export default function Tile({
         type="button"
         aria-label={label}
         aria-disabled={!isCovered}
-        className="group block size-full rounded-full perspective-distant focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 aria-disabled:cursor-default"
+        className="group focus-ring block size-full rounded-full perspective-distant aria-disabled:cursor-default"
         onClick={() => onSelect(tile.id)}
         whileTap={isCovered ? { scale: 0.92 } : undefined}
         transition={quickSpring}
@@ -82,9 +82,9 @@ export default function Tile({
           animate={tile.state}
           transition={flip}
         >
-          <span className="absolute inset-0 rounded-full bg-blue-700 transition-colors duration-300 backface-hidden group-hover:bg-blue-500" />
+          <span className="absolute inset-0 rounded-full bg-blue-700 transition-colors backface-hidden group-hover:bg-blue-500" />
           <span
-            className={`absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors duration-300 backface-hidden ${tile.state === "flipped" ? "bg-orange-500" : "bg-blue-200"} ${gridSize === "4x4" ? "text-5xl leading-15 sm:text-8xl" : "text-2xl sm:text-6xl sm:leading-15"}`}
+            className={`absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors backface-hidden ${tile.state === "flipped" ? "bg-orange-500" : "bg-blue-200"} ${gridSize === "4x4" ? "text-5xl leading-15 sm:text-8xl" : "text-2xl sm:text-6xl sm:leading-15"}`}
           >
             {theme === "numbers" ? (
               tile.value

@@ -6,14 +6,13 @@ import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center capitalize justify-center rounded-full text-base whitespace-nowrap sm:text-xl transition-[color,background-color,border-color,box-shadow] duration-300 outline-none select-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 items-center capitalize justify-center rounded-full text-base whitespace-nowrap sm:text-xl transition-colors select-none focus-ring disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
-        default:
-          "bg-orange-500 text-white hover:bg-orange-300 focus-visible:ring-orange-500",
+        default: "bg-orange-500 text-white hover:bg-orange-300",
         secondary:
-          "bg-blue-300 text-blue-700 hover:bg-blue-500 hover:text-neutral-100 focus-visible:ring-blue-300",
+          "bg-blue-300 text-blue-700 hover:bg-blue-500 hover:text-neutral-100",
       },
       size: {
         default: "h-10 px-4.5 sm:h-13 sm:px-6",

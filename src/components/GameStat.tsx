@@ -23,8 +23,7 @@ const statVariants = cva(
   },
 );
 
-const textTransition =
-  "transition-colors duration-300 motion-reduce:transition-none";
+const textTransition = "transition-colors motion-reduce:transition-none";
 
 const labelVariants = cva(
   `text-sm text-blue-600 capitalize ${textTransition}`,

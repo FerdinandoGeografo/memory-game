@@ -16,6 +16,19 @@
   font-display: swap;
 }
 
+/* One keyboard focus style for buttons, options and tiles: dark outline,
+   readable on every light surface they sit on */
+@utility focus-ring {
+  /* Colour set up front, so transition-colors doesn't fade the outline in */
+  outline-color: var(--color-blue-800);
+  outline-offset: 2px;
+
+  &:focus-visible {
+    outline-style: solid;
+    outline-width: 2px;
+  }
+}
+
 @layer base {
   button:not(:disabled),
   [role="button"]:not(:disabled) {
@@ -74,4 +87,7 @@
   --container-7xl: 90rem;
 
   --tracking-widest: 5px;
+
+  /* Colour transitions (hover, pressed, turn) all last 300ms */
+  --default-transition-duration: 300ms;
 }
