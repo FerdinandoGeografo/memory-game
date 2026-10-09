@@ -12,7 +12,9 @@ function PlayerCard({
   isCurrent: boolean;
 }) {
   return (
-    <div className="relative flex flex-1 flex-col items-center gap-5.75">
+    // From desktop a card stops at the Figma width (255px) and the group centres,
+    // so two players line up like the solo stats
+    <div className="relative flex flex-1 flex-col items-center gap-5.75 lg:max-w-63.75">
       {isCurrent && (
         <div
           style={{ clipPath: "polygon(0% 100%, 50% 0%, 100% 100%)" }}
@@ -51,7 +53,7 @@ export default function GameStats() {
       className={cn(
         "flex",
         isMulti
-          ? "gap-6 sm:gap-2.75 lg:gap-7.5"
+          ? "justify-center gap-6 sm:gap-2.75 lg:gap-7.5"
           : // Solo stats are a centred 540px group from tablet up
             "gap-6.25 sm:mx-auto sm:w-full sm:max-w-135 sm:gap-7.5",
       )}
