@@ -41,14 +41,25 @@ Users should be able to:
 
 ### Built with
 
-- Semantic HTML5 markup
-- CSS custom properties
-- Flexbox
-- CSS Grid
-- Mobile-first workflow
-- [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
+- Semantic HTML5 markup and accessible labels/announcements
+- Mobile-first workflow with Tailwind CSS 4 utilities and CSS custom properties
+- Flexbox and CSS Grid
+- [React 19](https://react.dev/) with TypeScript, Context + `useReducer` and the React Compiler
+- [Vite](https://vite.dev/) - build tool and dev server
+- [React Router](https://reactrouter.com/) - start and game routes
+- [Base UI](https://base-ui.com/) components (via local [shadcn](https://ui.shadcn.com/) wrappers) - dialogs, toggles, buttons
+- [Motion](https://motion.dev/) - tile flips, board entrance, dialogs and the current-turn highlight, with reduced-motion support
+- [Font Awesome](https://fontawesome.com/) - icons theme
+
+### Getting started
+
+```bash
+npm ci          # install the locked dependencies
+npm run dev     # start the dev server
+npm run lint    # ESLint
+npm run build   # type-check and production build
+npm run preview # serve the production build
+```
 
 ### What I learned
 
