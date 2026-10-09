@@ -1,21 +1,6 @@
 import useGame from "@/hooks/useGame";
 import Tile from "@/components/Tile";
-import { AnimatePresence, motion, stagger, type Variants } from "motion/react";
-
-// Spread the entrance over a fixed time so 36 tiles don't take longer than 16
-const ENTRANCE_SPREAD = 0.75;
-
-function boardVariants(tileCount: number): Variants {
-  const step = ENTRANCE_SPREAD / Math.max(tileCount - 1, 1);
-  return {
-    hidden: {
-      transition: { delayChildren: stagger(step / 2, { from: "last" }) },
-    },
-    visible: {
-      transition: { delayChildren: stagger(step, { startDelay: 0.15 }) },
-    },
-  };
-}
+import { AnimatePresence, motion } from "motion/react";
 
 export default function GameBoard() {
   const {
@@ -31,7 +16,8 @@ export default function GameBoard() {
     <AnimatePresence mode="wait">
       <motion.ul
         key={roundId}
-        variants={boardVariants(board.length)}
+        // Each tile times its own entrance (Tile); on Restart they all leave
+        // together before the new board comes in
         initial="hidden"
         animate="visible"
         exit="hidden"

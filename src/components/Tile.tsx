@@ -2,20 +2,30 @@ import { motion, type Variants } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getTileValueName, TILE_ICONS } from "@/constants/tile-icons";
+import { flip, leave, quickSpring } from "@/lib/motion/transitions";
 
-// Driven by the board's stagger (GameBoard)
+// Entrance: a diagonal wave from the top-left corner that takes the same time
+// on 4x4 and 6x6. The board (GameBoard) sends "visible", and "hidden" on Restart.
+const ENTRANCE_START = 0.15;
+const ENTRANCE_SPREAD = 0.6;
+
 const tileVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    scale: 0.6,
-    y: "-100%",
-    transition: { duration: 0.05, ease: "easeIn" },
-  },
-  visible: {
+  hidden: { opacity: 0, scale: 0.6, transition: leave },
+  visible: (delay: number) => ({
     opacity: 1,
     scale: 1,
-    y: 0,
-    transition: { duration: 0.15, ease: "easeOut" },
+    transition: { ...quickSpring, delay },
+  }),
+};
+
+// The faces turn with the tile's state; a found pair pulses once
+const faceVariants: Variants = {
+  covered: { rotateY: 0, scale: 1 },
+  flipped: { rotateY: 180, scale: 1 },
+  matched: {
+    rotateY: 180,
+    scale: [1, 1.08, 1],
+    transition: { ...flip, scale: { duration: 0.4, ease: "easeInOut" } },
   },
 };
 
@@ -36,7 +46,11 @@ export default function Tile({
   onSelect,
 }: TileProps) {
   const columns = gridSize === "4x4" ? 4 : 6;
-  const position = `Row ${Math.floor(index / columns) + 1}, column ${(index % columns) + 1}`;
+  const row = Math.floor(index / columns);
+  const column = index % columns;
+  const position = `Row ${row + 1}, column ${column + 1}`;
+  const entranceDelay =
+    ENTRANCE_START + ((row + column) / (2 * (columns - 1))) * ENTRANCE_SPREAD;
   const valueName = getTileValueName(tile.value, theme);
   const isCovered = tile.state === "covered";
   const label = isCovered
@@ -45,20 +59,28 @@ export default function Tile({
 
   return (
     // The grid column sets the width; the tile stays a circle at any size
-    <motion.li variants={tileVariants} className="aspect-square">
+    <motion.li
+      variants={tileVariants}
+      custom={entranceDelay}
+      className="aspect-square"
+    >
       {/* The button never rotates, so focus stays visible on both faces */}
-      <button
+      <motion.button
         type="button"
         aria-label={label}
         aria-disabled={!isCovered}
         className="group block size-full rounded-full perspective-distant focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500 aria-disabled:cursor-default"
         onClick={() => onSelect(tile.id)}
+        whileTap={isCovered ? { scale: 0.92 } : undefined}
+        transition={quickSpring}
       >
         <motion.span
           aria-hidden="true"
           className="relative block size-full transform-3d"
-          animate={{ rotateY: isCovered ? 0 : 180 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
+          variants={faceVariants}
+          initial={false}
+          animate={tile.state}
+          transition={flip}
         >
           <span className="absolute inset-0 rounded-full bg-blue-700 transition-colors duration-300 backface-hidden group-hover:bg-blue-500" />
           <span
@@ -74,7 +96,7 @@ export default function Tile({
             )}
           </span>
         </motion.span>
-      </button>
+      </motion.button>
     </motion.li>
   );
 }
