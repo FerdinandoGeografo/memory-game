@@ -39,7 +39,7 @@ export type GameAction =
   | { type: "setConfig"; payload: Partial<GameConfig> }
   | { type: "start" }
   | { type: "selectTile"; payload: { tileId: number } }
-  | { type: "resolveMatch"; payload: { tiles: [Tile, Tile] } }
+  | { type: "resolveMatch"; payload: { roundId: number } }
   | { type: "restart" }
   | { type: "pause" }
   | { type: "resume" }

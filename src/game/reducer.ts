@@ -52,7 +52,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "resolveMatch": {
-      const [a, b] = action.payload.tiles;
+      // Only the pending check of the current round, while playing
+      if (
+        state.status !== "playing" ||
+        !state.isChecking ||
+        action.payload.roundId !== state.roundId
+      )
+        return state;
+
+      const flipped = state.board.filter((t) => t.state === "flipped");
+      if (flipped.length !== 2) return state;
+
+      const [a, b] = flipped;
       const match = a.value === b.value;
       const board = state.board.map((t) =>
         t.id === a.id || t.id === b.id
@@ -95,7 +106,8 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         : state;
 
     case "quit":
-      return { ...initialState, config: state.config };
+      // Keep roundId increasing so a new round never reuses an old identity
+      return { ...initialState, config: state.config, roundId: state.roundId };
 
     default:
       throw new Error("Action type is unknown");

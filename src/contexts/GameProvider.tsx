@@ -5,24 +5,25 @@ import { useEffect, useReducer, type PropsWithChildren } from "react";
 export function GameProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
-  useEffect(() => {
-    const flipped = state.board.filter((t) => t.state === "flipped");
-    if (!state.isChecking || flipped.length !== 2) return;
+  const { status, isChecking, roundId } = state;
 
-    const [a, b] = flipped;
+  // Pausing clears the pending check; resuming schedules it again
+  useEffect(() => {
+    if (status !== "playing" || !isChecking) return;
+
     const check = setTimeout(() => {
-      dispatch({ type: "resolveMatch", payload: { tiles: [a, b] } });
+      dispatch({ type: "resolveMatch", payload: { roundId } });
     }, 450);
 
     return () => clearTimeout(check);
-  }, [state.isChecking, state.board]);
+  }, [status, isChecking, roundId]);
 
   useEffect(() => {
-    if (state.status !== "playing") return;
+    if (status !== "playing") return;
 
     const id = setInterval(() => dispatch({ type: "tick" }), 1_000);
     return () => clearInterval(id);
-  }, [state.status]);
+  }, [status]);
 
   return (
     <GameContext.Provider
