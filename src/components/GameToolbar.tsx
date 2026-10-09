@@ -22,7 +22,7 @@ export default function GameToolbar() {
 
   return (
     <header className="flex items-center justify-between gap-2">
-      <Logo variant="dark" />
+      <Logo variant="dark" className="max-sm:text-xl max-sm:leading-7.5" />
 
       <div className="hidden items-center gap-4 sm:flex">
         <Button onClick={() => dispatch(restartGame(config.gridSize))}>

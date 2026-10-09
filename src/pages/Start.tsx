@@ -36,7 +36,7 @@ export default function Start() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeInOut" }}
       >
-        <Logo />
+        <Logo className="max-sm:text-3xl max-sm:leading-10" />
       </motion.header>
 
       <main className="flex w-full max-w-2xl flex-col rounded-xl bg-neutral-100 p-6 sm:p-14">
