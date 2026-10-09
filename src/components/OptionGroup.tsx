@@ -14,9 +14,10 @@ interface OptionGroupProps<T extends string> {
   options: readonly Option<T>[];
 }
 
+// Figma gaps: 11px / 10px on mobile, 30px / 22px from tablet
 const GAP_BY_COUNT: Record<number, string> = {
-  2: "gap-7.5",
-  4: "gap-5.5",
+  2: "gap-2.75 sm:gap-7.5",
+  4: "gap-2.5 sm:gap-5.5",
 };
 const DEFAULT_GAP = "gap-4";
 
