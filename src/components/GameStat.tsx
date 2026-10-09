@@ -10,10 +10,10 @@ const statVariants = cva(
     variants: {
       variant: {
         // Stacked and centred on mobile, row from tablet
-        solo: "flex-col items-center gap-0.5 rounded-sm py-2.5 sm:flex-row sm:items-start sm:justify-between sm:gap-2 sm:rounded-lg sm:pt-4.25 sm:pr-6 sm:pb-3.75 sm:pl-5.25",
+        solo: "flex-col items-center gap-0.5 rounded-sm pt-2.5 pb-2.25 sm:flex-row sm:items-start sm:justify-between sm:gap-2 sm:rounded-lg sm:pt-4.25 sm:pr-6 sm:pb-3.75 sm:pl-5.25",
         // Stacked on mobile (centred) and tablet (left), row from desktop
         player:
-          "flex-col items-center gap-0.5 rounded-sm py-2.5 sm:items-start sm:gap-0.75 sm:rounded-lg sm:px-4 sm:py-3.5 lg:flex-row lg:justify-between lg:gap-2 lg:pt-4.25 lg:pr-6 lg:pb-3.75 lg:pl-5.25",
+          "flex-col items-center gap-0.5 rounded-sm pt-2.5 pb-2.25 sm:items-start sm:gap-0.75 sm:rounded-lg sm:px-4 sm:py-3.5 lg:flex-row lg:justify-between lg:gap-2 lg:pt-4.25 lg:pr-6 lg:pb-3.75 lg:pl-5.25",
         // Always a row: centred on mobile, top-aligned from tablet
         result:
           "flex-row items-center justify-between gap-2 rounded-sm px-4 py-2.5 sm:items-start sm:rounded-lg sm:px-8 sm:pt-4.25 sm:pb-3.75",
