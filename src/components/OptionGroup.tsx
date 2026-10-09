@@ -1,3 +1,5 @@
+import { motion } from "motion/react";
+import { fadeUp, popIn } from "@/lib/motion/variants";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 
 interface Option<T extends string> {
@@ -27,7 +29,8 @@ export default function OptionGroup<T extends string>({
   const gapCls = GAP_BY_COUNT[options.length] ?? DEFAULT_GAP;
 
   return (
-    <fieldset>
+    // Enters with its parent's stagger, then pops its options in one by one
+    <motion.fieldset variants={fadeUp({ step: 0.05, startDelay: 0.05 })}>
       <legend className="mb-2.75 text-sm leading-4.75 text-blue-600 sm:mb-4 sm:text-xl sm:leading-6.25">
         {label}
       </legend>
@@ -42,11 +45,15 @@ export default function OptionGroup<T extends string>({
         className={gapCls}
       >
         {options.map((option) => (
-          <ToggleGroupItem key={option.value} value={option.value}>
+          <ToggleGroupItem
+            key={option.value}
+            value={option.value}
+            variants={popIn()}
+          >
             {option.label}
           </ToggleGroupItem>
         ))}
       </ToggleGroup>
-    </fieldset>
+    </motion.fieldset>
   );
 }

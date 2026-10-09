@@ -8,6 +8,7 @@ import {
 import useGame from "@/hooks/useGame";
 import useGameActions from "@/hooks/useGameActions";
 import { loadGamePage } from "@/pages/load-game-page";
+import { fadeDown, fadeUp } from "@/lib/motion/variants";
 import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
 import { motion } from "motion/react";
@@ -42,15 +43,17 @@ export default function Start() {
 
   return (
     <div className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 py-20 sm:gap-19.5 sm:py-42.25 lg:py-38.5">
-      <motion.header
-        initial={{ opacity: 0, y: -24 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, ease: "easeInOut" }}
-      >
+      <motion.header variants={fadeDown()} initial="hidden" animate="visible">
         <Logo className="max-sm:text-3xl max-sm:leading-10" />
       </motion.header>
 
-      <main className="flex w-full max-w-2xl flex-col rounded-xl bg-neutral-100 p-6 sm:p-14">
+      {/* The card rises, then each option group and the button in turn */}
+      <motion.main
+        variants={fadeUp({ step: 0.1, startDelay: 0.15 })}
+        initial="hidden"
+        animate="visible"
+        className="flex w-full max-w-2xl flex-col rounded-xl bg-neutral-100 p-6 sm:p-14"
+      >
         <form className="flex flex-col gap-6 sm:gap-8" onSubmit={handleSubmit}>
           <OptionGroup
             label="Select Theme"
@@ -70,11 +73,16 @@ export default function Start() {
             onChange={(gridSize) => setConfig({ gridSize })}
             options={GRID_SIZE_OPTIONS}
           />
-          <Button type="submit" size="lg" className="mt-2 sm:mt-0">
+          <Button
+            type="submit"
+            size="lg"
+            className="mt-2 sm:mt-0"
+            variants={fadeUp()}
+          >
             Start Game
           </Button>
         </form>
-      </main>
+      </motion.main>
     </div>
   );
 }
