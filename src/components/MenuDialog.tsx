@@ -2,11 +2,11 @@ import useGameActions from "@/hooks/useGameActions";
 import { Button } from "@/ui/button";
 import { DialogContent, DialogClose, DialogTitle } from "@/ui/dialog";
 
-export default function MenuDialog({ open }: { open: boolean }) {
+export default function MenuDialog() {
   const { restart, newGame } = useGameActions();
 
   return (
-    <DialogContent open={open} className="gap-4 p-6">
+    <DialogContent className="gap-4 p-6">
       {/* The design has no visible title; keep an accessible name */}
       <DialogTitle className="sr-only">Game menu</DialogTitle>
 

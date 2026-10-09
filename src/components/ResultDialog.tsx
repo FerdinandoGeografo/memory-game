@@ -25,7 +25,7 @@ export default function ResultDialog() {
       // Results close only through Restart or Setup New Game
       onOpenChange={(_open, details) => details.cancel()}
     >
-      <DialogContent open={open}>
+      <DialogContent>
         <DialogHeader>
           <DialogTitle>{summary?.title}</DialogTitle>
           <DialogDescription>{summary?.description}</DialogDescription>

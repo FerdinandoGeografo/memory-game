@@ -4,8 +4,19 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
 
-function Dialog({ ...props }: DialogPrimitive.Root.Props) {
-  return <DialogPrimitive.Root data-slot="dialog" {...props} />;
+// Exit animations need the open state outside Base UI (Motion + Base UI
+// guidance), so Dialog is controlled and shares `open` with DialogContent.
+const DialogOpenContext = React.createContext(false);
+
+function Dialog({
+  open,
+  ...props
+}: DialogPrimitive.Root.Props & { open: boolean }) {
+  return (
+    <DialogOpenContext.Provider value={open}>
+      <DialogPrimitive.Root data-slot="dialog" open={open} {...props} />
+    </DialogOpenContext.Provider>
+  );
 }
 
 function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
@@ -17,11 +28,12 @@ function DialogClose({ ...props }: DialogPrimitive.Close.Props) {
 }
 
 function DialogContent({
-  open,
   className,
   children,
   ...props
-}: DialogPrimitive.Popup.Props & { open: boolean }) {
+}: DialogPrimitive.Popup.Props) {
+  const open = React.useContext(DialogOpenContext);
+
   return (
     <AnimatePresence>
       {open && (

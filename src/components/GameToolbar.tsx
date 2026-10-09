@@ -31,7 +31,7 @@ export default function GameToolbar() {
         <DialogTrigger render={<Button className="sm:hidden" />}>
           Menu
         </DialogTrigger>
-        <MenuDialog open={menuOpen} />
+        <MenuDialog />
       </Dialog>
     </header>
   );
