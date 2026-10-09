@@ -44,5 +44,4 @@ export type GameAction =
   | { type: "pause" }
   | { type: "resume" }
   | { type: "tick" }
-  | { type: "quit" }
-  | { type: "trigger" };
+  | { type: "quit" };

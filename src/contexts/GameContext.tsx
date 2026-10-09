@@ -32,20 +32,6 @@ function reducer(state: GameState, action: GameAction): GameState {
     case "setConfig":
       return { ...state, config: { ...state.config, ...action.payload } };
 
-    case "trigger": {
-      return {
-        ...state,
-        status: "finished",
-        players: state.players.map((p) => ({
-          ...p,
-          score: Math.floor(Math.random() * 6),
-        })),
-        board: state.board.map((t) => ({ ...t, state: "matched" })),
-        moves: 30,
-        elapsedSeconds: 240,
-      };
-    }
-
     case "start":
     case "restart":
       return {

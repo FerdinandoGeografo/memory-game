@@ -23,7 +23,6 @@ export default function GameToolbar() {
     <header className="flex items-center justify-between gap-2">
       <Logo variant="dark" />
 
-      <Button onClick={() => dispatch({ type: "trigger" })}>Test Dialog</Button>
       <div className="hidden items-center gap-4 sm:flex">
         <Button onClick={() => dispatch({ type: "restart" })}>Restart</Button>
         <Button variant="secondary" onClick={handleNewGame}>
