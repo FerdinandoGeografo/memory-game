@@ -3,6 +3,11 @@ import { Dialog as DialogPrimitive } from "@base-ui/react/dialog";
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
+import { fade } from "@/lib/motion/transitions";
+import { popIn } from "@/lib/motion/variants";
+
+// The popup grows in, then its children (buttons, header, rows) enter in turn
+const popupVariants = popIn({ step: 0.06, startDelay: 0.1 });
 
 // Exit animations need the open state outside Base UI (Motion + Base UI
 // guidance), so Dialog is controlled and shares `open` with DialogContent.
@@ -46,7 +51,7 @@ function DialogContent({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.3, ease: "easeOut" }}
+                transition={fade}
               />
             }
           />
@@ -61,10 +66,10 @@ function DialogContent({
               )}
               render={
                 <motion.div
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.85 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
+                  variants={popupVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
                 />
               }
               {...props}
@@ -78,9 +83,14 @@ function DialogContent({
   );
 }
 
-function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
+// Header and footer are motion elements, so they can take part in the
+// popup's stagger through `variants`
+function DialogHeader({
+  className,
+  ...props
+}: React.ComponentProps<typeof motion.div>) {
   return (
-    <div
+    <motion.div
       data-slot="dialog-header"
       className={cn("flex flex-col items-center gap-2.25 sm:gap-4", className)}
       {...props}
@@ -92,9 +102,9 @@ function DialogFooter({
   className,
   children,
   ...props
-}: React.ComponentProps<"div">) {
+}: React.ComponentProps<typeof motion.div>) {
   return (
-    <div
+    <motion.div
       data-slot="dialog-footer"
       className={cn(
         "flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-3.5",
@@ -103,7 +113,7 @@ function DialogFooter({
       {...props}
     >
       {children}
-    </div>
+    </motion.div>
   );
 }
 

@@ -1,5 +1,7 @@
+import { motion } from "motion/react";
 import useGameActions from "@/hooks/useGameActions";
 import useGameSummary from "@/hooks/useGameSummary";
+import { fadeUp, staggerChildren } from "@/lib/motion/variants";
 import {
   Dialog,
   DialogContent,
@@ -23,13 +25,17 @@ export default function ResultDialog() {
       // Results close only through Restart or Setup New Game
       onOpenChange={(_open, details) => details.cancel()}
     >
+      {/* Header, rows and buttons enter in turn after the popup */}
       <DialogContent>
-        <DialogHeader>
+        <DialogHeader variants={fadeUp()}>
           <DialogTitle>{summary?.title}</DialogTitle>
           <DialogDescription>{summary?.description}</DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col gap-2 sm:gap-4">
+        <motion.div
+          variants={staggerChildren(0.08)}
+          className="flex flex-col gap-2 sm:gap-4"
+        >
           {summary?.stats.map((stat) => (
             <GameStat
               variant="result"
@@ -37,14 +43,16 @@ export default function ResultDialog() {
               name={stat.name}
               value={stat.value}
               highlight={stat.isWinner ? "winner" : undefined}
+              variants={fadeUp()}
             />
           ))}
-        </div>
+        </motion.div>
 
-        <DialogFooter className="sm:mt-4">
+        <DialogFooter variants={staggerChildren(0.08, 0.2)} className="sm:mt-4">
           <Button
             className="h-12 text-lg leading-5.5 sm:flex-1"
             onClick={restart}
+            variants={fadeUp()}
           >
             Restart
           </Button>
@@ -53,6 +61,7 @@ export default function ResultDialog() {
             variant="secondary"
             className="h-12 text-lg leading-5.5 sm:flex-1"
             onClick={newGame}
+            variants={fadeUp()}
           >
             Setup New Game
           </Button>
