@@ -29,12 +29,13 @@ export function GameProvider({ children }: PropsWithChildren) {
     return () => clearTimeout(check);
   }, [status, isChecking, roundId, isPendingMatch]);
 
+  // roundId restarts the interval on Restart, so the first second is a full one
   useEffect(() => {
     if (status !== "playing") return;
 
     const id = setInterval(() => dispatch({ type: "tick" }), 1_000);
     return () => clearInterval(id);
-  }, [status]);
+  }, [status, roundId]);
 
   return (
     <GameContext.Provider
