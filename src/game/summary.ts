@@ -53,7 +53,7 @@ export function getGameSummary({
     stats: ranked.map((p) => ({
       name:
         p.score === topScore ? `Player ${p.id} (Winner!)` : `Player ${p.id}`,
-      value: `${p.score} Pairs`,
+      value: `${p.score} ${p.score === 1 ? "Pair" : "Pairs"}`,
       isWinner: p.score === topScore,
     })),
   };

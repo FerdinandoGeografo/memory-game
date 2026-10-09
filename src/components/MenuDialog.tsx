@@ -48,7 +48,7 @@ export default function MenuDialog() {
           />
         }
       >
-        Resume
+        Resume Game
       </DialogClose>
     </DialogContent>
   );
