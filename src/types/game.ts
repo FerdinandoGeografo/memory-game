@@ -37,10 +37,10 @@ export interface GameState {
 
 export type GameAction =
   | { type: "setConfig"; payload: Partial<GameConfig> }
-  | { type: "start" }
+  | { type: "start"; payload: { board: Tile[] } }
   | { type: "selectTile"; payload: { tileId: number } }
   | { type: "resolveMatch"; payload: { roundId: number } }
-  | { type: "restart" }
+  | { type: "restart"; payload: { board: Tile[] } }
   | { type: "pause" }
   | { type: "resume" }
   | { type: "tick" }

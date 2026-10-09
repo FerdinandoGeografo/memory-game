@@ -1,4 +1,5 @@
 import useGame from "@/hooks/useGame";
+import { restartGame } from "@/game/actions";
 import useGameSummary from "@/hooks/useGameSummary";
 import {
   Dialog,
@@ -15,14 +16,20 @@ import { useNavigate } from "react-router";
 const WINNER_HIGHLIGHT = { bg: "bg-blue-800", text: "text-white" };
 
 export default function ResultDialog() {
-  const { dispatch } = useGame();
+  const {
+    state: { config },
+    dispatch,
+  } = useGame();
   const navigate = useNavigate();
   const summary = useGameSummary();
 
   const open = summary !== null;
 
   return (
-    <Dialog open={open} onOpenChange={() => dispatch({ type: "restart" })}>
+    <Dialog
+      open={open}
+      onOpenChange={() => dispatch(restartGame(config.gridSize))}
+    >
       <DialogContent open={open}>
         <DialogHeader>
           <DialogTitle>{summary?.title}</DialogTitle>
@@ -44,7 +51,7 @@ export default function ResultDialog() {
         <DialogFooter className="sm:mt-4">
           <Button
             className="sm:flex-1"
-            onClick={() => dispatch({ type: "restart" })}
+            onClick={() => dispatch(restartGame(config.gridSize))}
           >
             Restart
           </Button>

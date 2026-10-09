@@ -1,6 +1,6 @@
 import { DEFAULT_GAME_CONFIG } from "@/constants/game-options";
 import type { GameAction, GameState } from "@/types/game";
-import { generateBoard, generatePlayers } from "@/utils/helpers";
+import { generatePlayers } from "@/utils/helpers";
 
 export const initialState: GameState = {
   config: DEFAULT_GAME_CONFIG,
@@ -25,7 +25,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         ...initialState,
         config: state.config,
         status: "playing",
-        board: generateBoard(state.config.gridSize),
+        board: action.payload.board,
         players: generatePlayers(state.config.players),
         roundId: state.roundId + 1,
       };

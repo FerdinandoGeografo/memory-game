@@ -6,6 +6,7 @@ import {
   THEME_OPTIONS,
 } from "@/constants/game-options";
 import useGame from "@/hooks/useGame";
+import { startGame } from "@/game/actions";
 import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
 import { useNavigate } from "react-router";
@@ -20,7 +21,7 @@ export default function Start() {
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    dispatch({ type: "start" });
+    dispatch(startGame(config.gridSize));
     navigate("/game");
   }
 

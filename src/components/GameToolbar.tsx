@@ -1,6 +1,7 @@
 import { Button } from "@/ui/button";
 import Logo from "./Logo";
 import useGame from "@/hooks/useGame";
+import { restartGame } from "@/game/actions";
 import { useNavigate } from "react-router";
 import { Dialog, DialogTrigger } from "@/ui/dialog";
 import MenuDialog from "./MenuDialog";
@@ -8,7 +9,7 @@ import MenuDialog from "./MenuDialog";
 export default function GameToolbar() {
   const navigate = useNavigate();
   const {
-    state: { status },
+    state: { status, config },
     dispatch,
   } = useGame();
 
@@ -24,7 +25,9 @@ export default function GameToolbar() {
       <Logo variant="dark" />
 
       <div className="hidden items-center gap-4 sm:flex">
-        <Button onClick={() => dispatch({ type: "restart" })}>Restart</Button>
+        <Button onClick={() => dispatch(restartGame(config.gridSize))}>
+          Restart
+        </Button>
         <Button variant="secondary" onClick={handleNewGame}>
           New game
         </Button>
