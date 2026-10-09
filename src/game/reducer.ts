@@ -1,21 +1,8 @@
 import { DEFAULT_GAME_CONFIG } from "@/constants/game-options";
 import type { GameAction, GameState } from "@/types/game";
 import { generateBoard, generatePlayers } from "@/utils/helpers";
-import {
-  createContext,
-  useEffect,
-  useReducer,
-  type PropsWithChildren,
-} from "react";
 
-interface GameContextValue {
-  state: GameState;
-  dispatch: React.Dispatch<GameAction>;
-}
-
-const GameContext = createContext<GameContextValue | null>(null);
-
-const initialState: GameState = {
+export const initialState: GameState = {
   config: DEFAULT_GAME_CONFIG,
   status: "idle",
   board: [],
@@ -27,7 +14,7 @@ const initialState: GameState = {
   roundId: 0,
 };
 
-function reducer(state: GameState, action: GameAction): GameState {
+export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "setConfig":
       return { ...state, config: { ...state.config, ...action.payload } };
@@ -114,39 +101,3 @@ function reducer(state: GameState, action: GameAction): GameState {
       throw new Error("Action type is unknown");
   }
 }
-
-function GameProvider({ children }: PropsWithChildren) {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
-  useEffect(() => {
-    const flipped = state.board.filter((t) => t.state === "flipped");
-    if (!state.isChecking || flipped.length !== 2) return;
-
-    const [a, b] = flipped;
-    const check = setTimeout(() => {
-      dispatch({ type: "resolveMatch", payload: { tiles: [a, b] } });
-    }, 450);
-
-    return () => clearTimeout(check);
-  }, [state.isChecking, state.board]);
-
-  useEffect(() => {
-    if (state.status !== "playing") return;
-
-    const id = setInterval(() => dispatch({ type: "tick" }), 1_000);
-    return () => clearInterval(id);
-  }, [state.status]);
-
-  return (
-    <GameContext.Provider
-      value={{
-        state,
-        dispatch,
-      }}
-    >
-      {children}
-    </GameContext.Provider>
-  );
-}
-
-export { GameProvider, GameContext };

@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router";
-import { GameProvider } from "@/contexts/GameContext";
+import { GameProvider } from "@/contexts/GameProvider";
 import Start from "@/pages/Start";
 import Game from "@/pages/Game";
 
