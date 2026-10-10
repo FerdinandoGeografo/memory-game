@@ -4,18 +4,16 @@ import GameStats from "@/components/GameStats";
 import GameToolbar from "@/components/GameToolbar";
 import ResultDialog from "@/components/ResultDialog";
 import useGame from "@/hooks/useGame";
-import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Navigate } from "react-router";
 
 export default function Game() {
-  const navigate = useNavigate();
   const {
     state: { status },
   } = useGame();
 
-  useEffect(() => {
-    if (status === "idle") navigate("/start");
-  }, [status, navigate]);
+  // No game to show (direct visit, refresh, left via Start): back to setup,
+  // replacing this history entry
+  if (status === "idle") return <Navigate to="/start" replace />;
 
   return (
     <div className="min-h-screen bg-neutral-100">
