@@ -52,7 +52,11 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
           ))}
         </motion.div>
 
-        <DialogFooter variants={fadeUp()} className="sm:mt-4">
+        {/* Player rows keep more room above the buttons than solo stats */}
+        <DialogFooter
+          variants={fadeUp()}
+          className={summary?.isSolo ? undefined : "sm:mt-4"}
+        >
           <Button className="h-12 text-lg sm:flex-1" onClick={restart}>
             Restart
           </Button>

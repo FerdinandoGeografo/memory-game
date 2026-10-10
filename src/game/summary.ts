@@ -8,6 +8,7 @@ type SummaryStat = {
 };
 
 export type GameSummary = {
+  isSolo: boolean;
   title: string;
   description: string;
   stats: SummaryStat[];
@@ -28,6 +29,7 @@ export function getGameSummary({
 
   if (players.length === 1) {
     return {
+      isSolo: true,
       title: "You did it!",
       description: "Game over! Here’s how you got on…",
       stats: [
@@ -48,6 +50,7 @@ export function getGameSummary({
   const winners = ranked.filter((p) => p.score === topScore);
 
   return {
+    isSolo: false,
     title: winners.length > 1 ? "It’s a tie!" : `Player ${winners[0].id} Wins!`,
     description: "Game over! Here are the results…",
     stats: ranked.map((p) => ({
