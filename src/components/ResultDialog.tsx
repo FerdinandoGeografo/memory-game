@@ -52,12 +52,8 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
           ))}
         </motion.div>
 
-        <DialogFooter variants={staggerChildren(0.08, 0.2)} className="sm:mt-4">
-          <Button
-            className="h-12 text-lg sm:flex-1"
-            onClick={restart}
-            variants={fadeUp()}
-          >
+        <DialogFooter variants={fadeUp()} className="sm:mt-4">
+          <Button className="h-12 text-lg sm:flex-1" onClick={restart}>
             Restart
           </Button>
 
@@ -65,7 +61,6 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
             variant="secondary"
             className="h-12 text-lg sm:flex-1"
             onClick={newGame}
-            variants={fadeUp()}
           >
             Setup New Game
           </Button>

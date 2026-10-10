@@ -83,7 +83,6 @@ export function GameStat({
           <motion.span
             aria-hidden="true"
             className={cn("absolute inset-0 -z-10", tone.bg)}
-            // x (not a transform string) so MotionConfig reduced motion applies
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}

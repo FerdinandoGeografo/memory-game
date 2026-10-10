@@ -2,8 +2,8 @@ import { stagger, type Transition, type Variants } from "motion/react";
 import { leave, quickSpring, spring } from "./transitions";
 
 // Every variant uses the labels "hidden" and "visible", so a parent's
-// initial/animate/exit reach its children. Only independent transforms
-// (x, y, scale): MotionConfig reducedMotion="user" turns them off, fades stay.
+// initial/animate/exit reach its children. With reduced motion they all jump
+// to their end state (see reduced-motion.ts).
 
 export interface EnterOptions {
   /** Horizontal offset to start from, in px. */

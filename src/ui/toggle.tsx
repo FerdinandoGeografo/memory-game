@@ -1,20 +1,15 @@
 import { Toggle as TogglePrimitive } from "@base-ui/react/toggle";
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
-// Same press feedback as Button; `variants` for a staggered entrance
-function Toggle({
-  className,
-  variants,
-  ...props
-}: TogglePrimitive.Props & { variants?: Variants }) {
+// Same press feedback as Button
+function Toggle({ className, ...props }: TogglePrimitive.Props) {
   return (
     <TogglePrimitive
       data-slot="toggle"
       render={
         <motion.button
-          variants={variants}
           whileHover={{ scale: 1.03 }}
           whileTap={{ scale: 0.97 }}
           transition={quickSpring}
