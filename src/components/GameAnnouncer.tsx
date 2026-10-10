@@ -4,6 +4,7 @@ import type { GameState } from "@/types/game";
 
 // Every message carries a changing number, so repeated outcomes are still announced
 function getAnnouncement({
+  status,
   config,
   lastMatch,
   players,
@@ -18,7 +19,8 @@ function getAnnouncement({
     .map((t) => getTileValueName(t.value, config.theme));
   if (revealed.length > 0) return `Revealed ${revealed.join(" and ")}.`;
 
-  if (lastMatch === null) return "";
+  // The results dialog takes over at the end
+  if (lastMatch === null || status === "finished") return "";
 
   if (players.length === 1) {
     const pairs = board.length / 2;
@@ -29,7 +31,7 @@ function getAnnouncement({
 
   const current = players[currentPlayerIndex];
   return lastMatch
-    ? `Match! Player ${current.id} has ${current.score} pairs and plays again.`
+    ? `Match! Player ${current.id} has ${current.score} ${current.score === 1 ? "pair" : "pairs"} and plays again.`
     : `No match. Player ${current.id}'s turn.`;
 }
 
