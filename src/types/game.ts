@@ -33,17 +33,20 @@ export interface GameState {
   // Outcome of the last resolved pair in this round, for announcements
   lastMatch: boolean | null;
   moves: number;
-  elapsedSeconds: number;
+  // Play time counted up to runningSince, the performance.now() timestamp the
+  // clock last started or ticked from; null while the clock is stopped
+  elapsedMs: number;
+  runningSince: number | null;
   roundId: number;
 }
 
 export type GameAction =
   | { type: "setConfig"; payload: Partial<GameConfig> }
-  | { type: "start"; payload: { board: Tile[] } }
+  | { type: "start"; payload: { board: Tile[]; now: number } }
   | { type: "selectTile"; payload: { tileId: number } }
-  | { type: "resolveMatch"; payload: { roundId: number } }
-  | { type: "restart"; payload: { board: Tile[] } }
-  | { type: "pause" }
-  | { type: "resume" }
-  | { type: "tick" }
+  | { type: "resolveMatch"; payload: { roundId: number; now: number } }
+  | { type: "restart"; payload: { board: Tile[]; now: number } }
+  | { type: "pause"; payload: { now: number } }
+  | { type: "resume"; payload: { now: number } }
+  | { type: "tick"; payload: { now: number } }
   | { type: "quit" };

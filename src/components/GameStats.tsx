@@ -81,7 +81,7 @@ function PlayerCard({
 
 export default function GameStats() {
   const {
-    state: { config, players, moves, elapsedSeconds, currentPlayerIndex },
+    state: { config, players, moves, elapsedMs, currentPlayerIndex },
   } = useGame();
 
   const isMulti = players.length > 1;
@@ -113,7 +113,7 @@ export default function GameStats() {
         <>
           <GameStat
             name="time"
-            value={formatTime(elapsedSeconds)}
+            value={formatTime(elapsedMs)}
             variants={cardVariants}
           />
           <GameStat

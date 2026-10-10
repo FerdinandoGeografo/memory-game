@@ -11,9 +11,17 @@ export const initialState: GameState = {
   isChecking: false,
   lastMatch: null,
   moves: 0,
-  elapsedSeconds: 0,
+  elapsedMs: 0,
+  runningSince: null,
   roundId: 0,
 };
+
+// Play time including the stretch since the clock last started or ticked
+function elapsedAt(state: GameState, now: number) {
+  return state.runningSince === null
+    ? state.elapsedMs
+    : state.elapsedMs + now - state.runningSince;
+}
 
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
@@ -28,6 +36,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         status: "playing",
         board: action.payload.board,
         players: generatePlayers(state.config.players),
+        runningSince: action.payload.now,
         roundId: state.roundId + 1,
       };
 
@@ -85,7 +94,12 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         players,
         isChecking: false,
         lastMatch: match,
-        status: isComplete ? "finished" : "playing",
+        // The last pair stops the clock
+        ...(isComplete && {
+          status: "finished",
+          elapsedMs: elapsedAt(state, action.payload.now),
+          runningSince: null,
+        }),
         currentPlayerIndex: match
           ? state.currentPlayerIndex
           : (state.currentPlayerIndex + 1) % players.length,
@@ -94,17 +108,26 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case "pause":
       return state.status === "playing"
-        ? { ...state, status: "paused" }
+        ? {
+            ...state,
+            status: "paused",
+            elapsedMs: elapsedAt(state, action.payload.now),
+            runningSince: null,
+          }
         : state;
 
     case "resume":
       return state.status === "paused"
-        ? { ...state, status: "playing" }
+        ? { ...state, status: "playing", runningSince: action.payload.now }
         : state;
 
     case "tick":
       return state.status === "playing"
-        ? { ...state, elapsedSeconds: state.elapsedSeconds + 1 }
+        ? {
+            ...state,
+            elapsedMs: elapsedAt(state, action.payload.now),
+            runningSince: action.payload.now,
+          }
         : state;
 
     case "quit":

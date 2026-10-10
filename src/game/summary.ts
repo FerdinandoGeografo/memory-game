@@ -15,14 +15,14 @@ export type GameSummary = {
 
 type SummaryInput = Pick<
   GameState,
-  "status" | "players" | "moves" | "elapsedSeconds"
+  "status" | "players" | "moves" | "elapsedMs"
 >;
 
 export function getGameSummary({
   status,
   players,
   moves,
-  elapsedSeconds,
+  elapsedMs,
 }: SummaryInput): GameSummary | null {
   if (status !== "finished") return null;
 
@@ -33,7 +33,7 @@ export function getGameSummary({
       stats: [
         {
           name: "Time elapsed",
-          value: formatTime(elapsedSeconds),
+          value: formatTime(elapsedMs),
         },
         {
           name: "Moves taken",
