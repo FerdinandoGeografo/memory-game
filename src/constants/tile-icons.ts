@@ -21,7 +21,7 @@ import {
   faCarrot,
 } from "@fortawesome/free-solid-svg-icons";
 
-// The design's own icons come first, so a 4x4 board uses only those
+// The challenge's own icons come first, so a 4x4 board uses only those
 export const TILE_ICONS: IconDefinition[] = [
   faAnchor,
   faFlask,

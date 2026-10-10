@@ -45,17 +45,17 @@ export function enterFrom({
   };
 }
 
-/** Rises into place from 24px below. */
+/** Rises into place from below. */
 export function fadeUp(children?: EnterOptions["children"]) {
   return enterFrom({ y: 24, children });
 }
 
-/** Drops into place from 24px above. */
+/** Drops into place from above. */
 export function fadeDown() {
   return enterFrom({ y: -24 });
 }
 
-/** Grows into place from 90%, quickly: small items and popups. */
+/** Grows into place, quickly: small items and popups. */
 export function popIn(children?: EnterOptions["children"]) {
   return enterFrom({ scale: 0.9, transition: quickSpring, children });
 }
