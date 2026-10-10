@@ -1,48 +1,51 @@
 import { type IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import type { GameTheme } from "@/types/game";
 import {
+  faAnchor,
+  faFlask,
+  faSun,
+  faHandSpock,
+  faMoon,
+  faFutbol,
+  faCar,
+  faTurkishLiraSign,
+  faSnowflake,
   faStar,
   faHeart,
   faBolt,
-  faMoon,
-  faSun,
   faCloud,
   faFire,
   faLeaf,
-  faSnowflake,
   faGem,
-  faAnchor,
   faBell,
   faCarrot,
-  faFeather,
-  faFish,
-  faGhost,
-  faKey,
-  faMusic,
 } from "@fortawesome/free-solid-svg-icons";
 
+// The design's own icons come first, so a 4x4 board uses only those
 export const TILE_ICONS: IconDefinition[] = [
+  faAnchor,
+  faFlask,
+  faSun,
+  faHandSpock,
+  faMoon,
+  faFutbol,
+  faCar,
+  faTurkishLiraSign,
+  faSnowflake,
   faStar,
   faHeart,
   faBolt,
-  faMoon,
-  faSun,
   faCloud,
   faFire,
   faLeaf,
-  faSnowflake,
   faGem,
-  faAnchor,
   faBell,
   faCarrot,
-  faFeather,
-  faFish,
-  faGhost,
-  faKey,
-  faMusic,
 ];
 
 // What a tile shows, in words: its number or its icon's name
 export function getTileValueName(value: number, theme: GameTheme) {
-  return theme === "numbers" ? String(value) : TILE_ICONS[value].iconName;
+  return theme === "numbers"
+    ? String(value)
+    : TILE_ICONS[value].iconName.replaceAll("-", " ");
 }
