@@ -20,10 +20,10 @@ export default function Start() {
   } = useGame();
   const { start } = useGameActions();
 
-  // Coming back here (e.g. browser Back) pauses a game in progress.
-  // dispatch is stable, so this runs once per visit.
+  // Coming back here (e.g. browser Back) ends a game in progress, so the
+  // options always describe the next game. dispatch is stable: once per visit.
   useEffect(() => {
-    dispatch({ type: "pause" });
+    dispatch({ type: "quit" });
   }, [dispatch]);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {

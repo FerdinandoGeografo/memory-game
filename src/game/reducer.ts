@@ -108,6 +108,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         : state;
 
     case "quit":
+      if (state.status === "idle") return state;
       // Keep roundId increasing so a new round never reuses an old identity
       return { ...initialState, config: state.config, roundId: state.roundId };
 
