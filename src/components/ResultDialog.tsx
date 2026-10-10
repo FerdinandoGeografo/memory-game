@@ -13,7 +13,11 @@ import {
 import { Button } from "@/ui/button";
 import { GameStat } from "./GameStat";
 
-export default function ResultDialog() {
+interface ResultDialogProps {
+  finalFocus: React.RefObject<HTMLElement | null>;
+}
+
+export default function ResultDialog({ finalFocus }: ResultDialogProps) {
   const { restart, newGame } = useGameActions();
   const summary = useGameSummary();
 
@@ -26,7 +30,7 @@ export default function ResultDialog() {
       onOpenChange={(_open, details) => details.cancel()}
     >
       {/* Header, rows and buttons enter in turn after the popup */}
-      <DialogContent>
+      <DialogContent finalFocus={finalFocus}>
         <DialogHeader variants={fadeUp()}>
           <DialogTitle>{summary?.title}</DialogTitle>
           <DialogDescription>{summary?.description}</DialogDescription>
