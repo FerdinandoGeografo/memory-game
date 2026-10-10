@@ -3,7 +3,6 @@ import { AnimatePresence, motion, type Variants } from "motion/react";
 import { slide } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
-// One variant per Figma use case: solo stats, player cards, result rows
 const statVariants = cva(
   "relative isolate flex w-full overflow-hidden bg-blue-300",
   {

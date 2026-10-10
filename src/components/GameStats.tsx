@@ -7,9 +7,6 @@ import { cn } from "@/lib/utils";
 import type { Player } from "@/types/game";
 import { formatTime } from "@/utils/helpers";
 
-// Figma space above the stats (from the board) and under them, kept when a
-// short viewport scrolls. Same on mobile; from tablet it depends on the grid
-// and on the mode, as player cards and solo stats differ in height.
 const SPACING = {
   solo: {
     bottom: "sm:mb-12 lg:mb-17.5",
@@ -33,8 +30,6 @@ function PlayerCard({
   isCurrent: boolean;
 }) {
   return (
-    // From desktop a card stops at the Figma width (255px) and the group centres,
-    // so two players line up like the solo stats
     <motion.div
       variants={cardVariants}
       className="relative flex-1 lg:max-w-63.75"
@@ -42,8 +37,6 @@ function PlayerCard({
       {/* No animation for the first player: it enters with its card */}
       <AnimatePresence initial={false}>
         {isCurrent && (
-          // The marker rises out of the card's top edge once the highlight
-          // has slid in, and drops back as the turn passes
           <div
             aria-hidden="true"
             className="absolute top-0 left-1/2 h-2 w-4 -translate-x-1/2 -translate-y-full overflow-hidden sm:h-3 sm:w-6 lg:h-5 lg:w-10"
@@ -71,11 +64,7 @@ function PlayerCard({
       />
 
       {isCurrent && (
-        // Out of the flow, 23px under the card: as in Figma it sits in the
-        // page's bottom space instead of making the stats taller
         <div className="absolute inset-x-0 top-full mt-5.75 flex justify-center">
-          {/* One label shared by the cards: on a turn change it travels to
-              the new card with the highlight instead of disappearing */}
           <motion.span
             layoutId="current-turn"
             layout="position"
@@ -90,7 +79,6 @@ function PlayerCard({
   );
 }
 
-// Time and moves for a solo game, one card per player otherwise
 export default function GameStats() {
   const {
     state: { config, players, moves, elapsedSeconds, currentPlayerIndex },
@@ -110,8 +98,7 @@ export default function GameStats() {
         spacing.bottom,
         isMulti
           ? "justify-center gap-6 sm:gap-2.75 lg:gap-7.5"
-          : // Solo stats are a centred 540px group from tablet up
-            "gap-6.25 sm:mx-auto sm:w-full sm:max-w-135 sm:gap-7.5",
+          : "gap-6.25 sm:mx-auto sm:w-full sm:max-w-135 sm:gap-7.5",
       )}
     >
       {isMulti ? (

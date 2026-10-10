@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getTileValueName, TILE_ICONS } from "@/constants/tile-icons";
 import { flip, leave, quickSpring } from "@/lib/motion/transitions";
 
-// Entrance: a diagonal wave from the top-left corner that takes the same time
-// on 4x4 and 6x6. The board (GameBoard) sends "visible", and "hidden" on Restart.
 const ENTRANCE_START = 0.15;
 const ENTRANCE_SPREAD = 0.6;
 
@@ -18,7 +16,6 @@ const tileVariants: Variants = {
   }),
 };
 
-// The faces turn with the tile's state; a found pair pulses once
 const faceVariants: Variants = {
   covered: { rotateY: 0, scale: 1 },
   flipped: { rotateY: 180, scale: 1 },
@@ -29,7 +26,6 @@ const faceVariants: Variants = {
   },
 };
 
-// Props only, no Context: the timer's tick re-renders the board, not every tile
 interface TileProps {
   tile: Tile;
   index: number;
@@ -58,7 +54,6 @@ export default function Tile({
     : `${position}, ${valueName}, ${tile.state === "matched" ? "matched" : "revealed"}`;
 
   return (
-    // The grid column sets the width; the tile stays a circle at any size
     <motion.li
       variants={tileVariants}
       custom={entranceDelay}
@@ -89,8 +84,6 @@ export default function Tile({
             {theme === "numbers" ? (
               tile.value
             ) : (
-              // A share of the tile, as in Figma (40px in an 82px tile), so
-              // icons scale with the fluid board on every grid and viewport
               <FontAwesomeIcon
                 className="size-[48%]!"
                 icon={TILE_ICONS[tile.value]}

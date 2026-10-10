@@ -14,7 +14,6 @@ interface OptionGroupProps<T extends string> {
   options: readonly Option<T>[];
 }
 
-// Figma gaps: 11px / 10px on mobile, 30px / 22px from tablet
 const GAP_BY_COUNT: Record<number, string> = {
   2: "gap-2.75 sm:gap-7.5",
   4: "gap-2.5 sm:gap-5.5",
@@ -30,7 +29,6 @@ export default function OptionGroup<T extends string>({
   const gapCls = GAP_BY_COUNT[options.length] ?? DEFAULT_GAP;
 
   return (
-    // Enters with its parent's stagger, then pops its options in one by one
     <motion.fieldset variants={fadeUp({ step: 0.05, startDelay: 0.05 })}>
       <legend className="mb-2.75 text-sm text-blue-600 sm:mb-4 sm:text-xl">
         {label}
