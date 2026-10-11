@@ -1,6 +1,7 @@
 import { motion, useIsPresent } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { GRID_COLUMNS } from "@/constants/game-options";
 import { tileFaceVariants } from "@/constants/tile";
 import { TILE_ICONS } from "@/constants/tile-icons";
 import {
@@ -27,7 +28,7 @@ export default function Tile({
   onSelect,
 }: TileProps) {
   const isPresent = useIsPresent();
-  const columns = gridSize === "4x4" ? 4 : 6;
+  const columns = GRID_COLUMNS[gridSize];
   const row = Math.floor(index / columns);
   const column = index % columns;
   const position = `Row ${row + 1}, column ${column + 1}`;

@@ -1,4 +1,4 @@
-import { TILE_VALUE_COUNT } from "@/constants/game-options";
+import { GRID_COLUMNS, TILE_VALUE_COUNT } from "@/constants/game-options";
 import { TILE_ICONS } from "@/constants/tile-icons";
 import type {
   GameTheme,
@@ -18,8 +18,7 @@ function shuffle<T>(items: T[]): T[] {
 }
 
 export function generateBoard(gridSize: GridSize): Tile[] {
-  const dim = gridSize === "4x4" ? 4 : 6;
-  const pairsCount = (dim * dim) / 2;
+  const pairsCount = GRID_COLUMNS[gridSize] ** 2 / 2;
   const values = shuffle(
     Array.from({ length: TILE_VALUE_COUNT }, (_, i) => i),
   ).slice(0, pairsCount);
