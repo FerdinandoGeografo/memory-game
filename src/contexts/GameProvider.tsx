@@ -1,6 +1,6 @@
 import { GameContext } from "@/contexts/game-context";
 import { initialState } from "@/constants/initial-state";
-import { MATCH_DELAY_MS, MISMATCH_DELAY_MS } from "@/constants/timing";
+import { MATCH_DELAY_MS, MISMATCH_DELAY_MS, TICK_MS } from "@/constants/timing";
 import { gameReducer } from "@/contexts/game-reducer";
 import { getFlippedTiles } from "@/utils/board";
 import { useEffect, useReducer, type PropsWithChildren } from "react";
@@ -35,7 +35,7 @@ export default function GameProvider({ children }: PropsWithChildren) {
 
     const id = setInterval(
       () => dispatch({ type: "tick", payload: { now: performance.now() } }),
-      1_000,
+      TICK_MS,
     );
     return () => clearInterval(id);
   }, [status, roundId]);
