@@ -12,20 +12,20 @@ export type GameConfig = {
 
 export type TileState = "covered" | "flipped" | "matched";
 
-export interface Tile {
+export type Tile = {
   id: number;
   value: number;
   state: TileState;
-}
+};
 
-export interface Player {
+export type Player = {
   id: number;
   score: number;
-}
+};
 
 export type GameStatus = "idle" | "playing" | "paused" | "finished";
 
-export interface GameState {
+export type GameState = {
   config: GameConfig;
   status: GameStatus;
   board: Tile[];
@@ -37,7 +37,7 @@ export interface GameState {
   elapsedMs: number;
   runningSince: number | null;
   roundId: number;
-}
+};
 
 export type GameAction =
   | { type: "setConfig"; payload: Partial<GameConfig> }

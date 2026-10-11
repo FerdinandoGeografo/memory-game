@@ -1,4 +1,4 @@
-export interface Option<T extends string> {
+export type Option<T extends string> = {
   value: T;
   label: string;
-}
+};
