@@ -1,4 +1,4 @@
-import { motion } from "motion/react";
+import { motion, useIsPresent } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { TILE_ICONS } from "@/constants/tile-icons";
@@ -25,6 +25,7 @@ export default function Tile({
   theme,
   onSelect,
 }: TileProps) {
+  const isPresent = useIsPresent();
   const columns = gridSize === "4x4" ? 4 : 6;
   const row = Math.floor(index / columns);
   const column = index % columns;
@@ -40,6 +41,7 @@ export default function Tile({
     <motion.li
       variants={tileVariants}
       custom={entranceDelay}
+      inert={!isPresent}
       className="aspect-square"
     >
       <motion.button

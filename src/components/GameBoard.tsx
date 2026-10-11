@@ -1,6 +1,6 @@
 import useGame from "@/hooks/useGame";
 import Tile from "@/components/Tile";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 
 export default function GameBoard() {
   const {
@@ -13,23 +13,26 @@ export default function GameBoard() {
   }
 
   return (
-    <motion.ul
-      key={roundId}
-      initial="hidden"
-      animate="visible"
-      aria-label="Game board"
-      className={`mt-20 grid w-full max-w-81.75 self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-39.25 sm:max-w-133 sm:gap-5 lg:mt-26.25" : "grid-cols-6 gap-2.25 sm:mt-30.25 sm:max-w-143 sm:gap-4 lg:mt-21.25"}`}
-    >
-      {board.map((tile, index) => (
-        <Tile
-          key={tile.id}
-          tile={tile}
-          index={index}
-          gridSize={config.gridSize}
-          theme={config.theme}
-          onSelect={selectTile}
-        />
-      ))}
-    </motion.ul>
+    <AnimatePresence mode="wait">
+      <motion.ul
+        key={roundId}
+        initial="hidden"
+        animate="visible"
+        exit="hidden"
+        aria-label="Game board"
+        className={`mt-20 grid w-full max-w-81.75 self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-39.25 sm:max-w-133 sm:gap-5 lg:mt-26.25" : "grid-cols-6 gap-2.25 sm:mt-30.25 sm:max-w-143 sm:gap-4 lg:mt-21.25"}`}
+      >
+        {board.map((tile, index) => (
+          <Tile
+            key={tile.id}
+            tile={tile}
+            index={index}
+            gridSize={config.gridSize}
+            theme={config.theme}
+            onSelect={selectTile}
+          />
+        ))}
+      </motion.ul>
+    </AnimatePresence>
   );
 }

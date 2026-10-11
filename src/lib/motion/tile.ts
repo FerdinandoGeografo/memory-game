@@ -1,5 +1,5 @@
 import type { Variants } from "motion/react";
-import { flip, quickSpring } from "@/lib/motion/transitions";
+import { flip, leave, quickSpring } from "@/lib/motion/transitions";
 
 const ENTRANCE_START = 0.15;
 const ENTRANCE_SPREAD = 0.6;
@@ -15,7 +15,7 @@ export function tileEntranceDelay(
 }
 
 export const tileVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.6 },
+  hidden: { opacity: 0, scale: 0.6, transition: leave },
   visible: (delay: number) => ({
     opacity: 1,
     scale: 1,
