@@ -44,7 +44,7 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
         >
           {summary?.stats.map((stat) => (
             <GameStat
-              variant="result"
+              layout="result"
               key={stat.name}
               name={stat.name}
               value={stat.value}

@@ -37,7 +37,7 @@ export default function PlayerCard({ player, isCurrent }: PlayerCardProps) {
       </AnimatePresence>
 
       <GameStat
-        variant="player"
+        layout="player"
         highlight={isCurrent ? "turn" : undefined}
         name={playerName(player.id)}
         shortName={`P${player.id}`}

@@ -21,13 +21,13 @@ export default function GameStat({
   shortName,
   value,
   highlight,
-  variant,
+  layout,
   variants,
 }: GameStatProps) {
   const highlighted = Boolean(highlight);
 
   return (
-    <motion.div variants={variants} className={statVariants({ variant })}>
+    <motion.div variants={variants} className={statVariants({ layout })}>
       <AnimatePresence initial={false}>
         {highlight && (
           <motion.span
@@ -41,7 +41,7 @@ export default function GameStat({
         )}
       </AnimatePresence>
 
-      <span className={labelVariants({ variant, highlighted })}>
+      <span className={labelVariants({ layout, highlighted })}>
         {shortName ? (
           <>
             <span aria-hidden="true" className="sm:hidden">
@@ -53,7 +53,7 @@ export default function GameStat({
           name
         )}
       </span>
-      <span className={valueVariants({ variant, highlighted })}>{value}</span>
+      <span className={valueVariants({ layout, highlighted })}>{value}</span>
     </motion.div>
   );
 }
