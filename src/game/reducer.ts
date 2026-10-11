@@ -11,6 +11,7 @@ function elapsedAt(state: GameState, now: number) {
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "setConfig":
+      if (state.status !== "idle") return state;
       return { ...state, config: { ...state.config, ...action.payload } };
 
     case "start":
