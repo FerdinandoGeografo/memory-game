@@ -1,4 +1,5 @@
-import type { GameConfig, GridSize } from "@/types/game";
+import { TILE_ICONS } from "@/constants/tile-icons";
+import type { GameConfig, GameTheme, GridSize } from "@/types/game";
 
 export const THEME_OPTIONS = [
   { value: "numbers", label: "Numbers" },
@@ -25,4 +26,7 @@ export const DEFAULT_GAME_CONFIG: GameConfig = {
 
 export const GRID_COLUMNS: Record<GridSize, number> = { "4x4": 4, "6x6": 6 };
 
-export const TILE_VALUE_COUNT = 18;
+export const TILE_VALUE_COUNT: Record<GameTheme, number> = {
+  numbers: 100,
+  icons: TILE_ICONS.length,
+};

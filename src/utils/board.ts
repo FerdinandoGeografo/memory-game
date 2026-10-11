@@ -1,5 +1,5 @@
 import { GRID_COLUMNS, TILE_VALUE_COUNT } from "@/constants/game-options";
-import type { GridSize, Player, PlayerCount, Tile } from "@/types/game";
+import type { GameConfig, Player, PlayerCount, Tile } from "@/types/game";
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -10,10 +10,10 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
-export function generateBoard(gridSize: GridSize): Tile[] {
+export function generateBoard({ gridSize, theme }: GameConfig): Tile[] {
   const pairsCount = GRID_COLUMNS[gridSize] ** 2 / 2;
   const values = shuffle(
-    Array.from({ length: TILE_VALUE_COUNT }, (_, i) => i),
+    Array.from({ length: TILE_VALUE_COUNT[theme] }, (_, i) => i),
   ).slice(0, pairsCount);
   const deck = shuffle([...values, ...values]);
 

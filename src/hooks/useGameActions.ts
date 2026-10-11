@@ -18,7 +18,7 @@ export default function useGameActions() {
     dispatch({
       type: "start",
       payload: {
-        board: generateBoard(config.gridSize),
+        board: generateBoard(config),
         now: performance.now(),
       },
     });
@@ -29,7 +29,7 @@ export default function useGameActions() {
     dispatch({
       type: "restart",
       payload: {
-        board: generateBoard(config.gridSize),
+        board: generateBoard(config),
         now: performance.now(),
       },
     });

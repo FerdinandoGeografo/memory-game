@@ -57,7 +57,7 @@ Users should be able to:
 
 - **State**: one reducer (`src/contexts/game-reducer.ts`) holds the board, players, turn, moves and clock, and accepts setup changes only between games. Every user action goes through `useGameActions` (`src/hooks/useGameActions.ts`), which creates the shuffled board and the timestamps when the event happens, so the reducer stays pure; only the provider's own timers dispatch the clock tick and the pair resolution.
 - **Derived values**: the results summary and the screen-reader announcements are pure functions of the state (`src/utils`), recomputed whenever the context re-renders their component.
-- **Board**: a 6x6 board uses all 18 values (numbers 0-17 or 18 icons); a 4x4 board draws 8 of them at random.
+- **Board**: every new board draws its values at random, 8 pairs on 4x4 and 18 on 6x6, from the numbers 0-99 or from 40 icons.
 - **Matching**: after the second tile, the provider waits (longer on a mismatch, so the value can be read), then resolves the pair. The resolution carries a round id, so a check left over from a restarted game is ignored. Pausing freezes the check; resuming starts it again.
 - **Clock**: play time is counted from `performance.now()` timestamps, so pauses keep the part of a second already played and a background tab still counts real time. The last pair stops it.
 - **Navigation**: `/game` without a game in progress redirects to `/start`. Going back to the setup screen ends the current game, so Forward never shows an old board with new options. Every route change starts from the top of the page.
