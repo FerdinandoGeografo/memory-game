@@ -6,7 +6,7 @@ import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex shrink-0 items-center capitalize justify-center rounded-full text-base whitespace-nowrap sm:text-xl transition-colors select-none focus-ring disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex shrink-0 items-center justify-center rounded-full whitespace-nowrap transition-colors select-none focus-ring",
   {
     variants: {
       variant: {
@@ -15,7 +15,8 @@ const buttonVariants = cva(
           "bg-blue-300 text-blue-700 hover:bg-blue-500 hover:text-neutral-100",
       },
       size: {
-        default: "h-10 px-4.5 sm:h-13 sm:px-6",
+        default: "h-10 px-4.5 text-base sm:h-13 sm:px-6 sm:text-xl",
+        md: "h-12 px-4.5 text-lg sm:h-13 sm:px-6 sm:text-xl",
         lg: "h-12 px-6 text-lg sm:h-17.5 sm:px-8 sm:text-4xl",
       },
     },

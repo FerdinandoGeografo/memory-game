@@ -8,7 +8,7 @@ function ToggleGroup({ className, ...props }: ToggleGroupPrimitive.Props) {
   return (
     <ToggleGroupPrimitive
       data-slot="toggle-group"
-      className={cn("flex w-full flex-row items-center", className)}
+      className={cn("flex w-full", className)}
       {...props}
     />
   );

@@ -34,7 +34,7 @@ export default function MenuDialog() {
           />
         }
       >
-        New game
+        New Game
       </DialogClose>
 
       <DialogClose

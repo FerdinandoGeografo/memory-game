@@ -22,7 +22,7 @@ export default function GameToolbar() {
           Restart
         </Button>
         <Button variant="secondary" onClick={newGame}>
-          New game
+          New Game
         </Button>
       </div>
 

@@ -57,13 +57,14 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
           variants={fadeUp()}
           className={summary?.isSolo ? undefined : "sm:mt-4"}
         >
-          <Button className="h-12 text-lg sm:flex-1" onClick={restart}>
+          <Button size="md" className="sm:flex-1" onClick={restart}>
             Restart
           </Button>
 
           <Button
             variant="secondary"
-            className="h-12 text-lg sm:flex-1"
+            size="md"
+            className="sm:flex-1"
             onClick={newGame}
           >
             Setup New Game
