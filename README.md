@@ -11,6 +11,7 @@ This is a solution to the [Memory game challenge on Frontend Mentor](https://www
 - [My process](#my-process)
   - [Built with](#built-with)
   - [Getting started](#getting-started)
+  - [Project structure](#project-structure)
   - [How it works](#how-it-works)
   - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
@@ -71,6 +72,24 @@ npm run preview # serve the production build
 ```
 
 There is no automated test suite: changes are checked with lint, the type-checked build and the running app in the browser.
+
+### Project structure
+
+Each file has one responsibility: a component with its own props, or a group of types, constants or pure functions.
+
+```text
+src/
+├── pages/        Start (setup) and Game routes
+├── components/   one component per file: board, tile, stats, player card, toolbar, dialogs
+├── ui/           local shadcn wrappers around Base UI (button, toggle group, dialog)
+├── game/         pure logic: reducer, results summary, screen-reader announcements
+├── contexts/     game context and provider (match check and clock timers)
+├── hooks/        context access, game actions, results summary
+├── constants/    options, initial state, timing, tile icons; styles/ holds style maps
+├── types/        shared types
+├── lib/motion/   transitions and variants, tile animation presets
+└── utils/        board and player generation, time and tile-name formatting
+```
 
 ### How it works
 
