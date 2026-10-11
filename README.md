@@ -103,7 +103,7 @@ src/
 ### What I learned
 
 - Code-splitting two routes was not worth it here: the start screen preloaded the game page anyway, and a single bundle reached first paint sooner on a throttled connection.
-- A restarted board had an exit animation; while it played, its tiles could still be clicked, and tile ids repeat across rounds. Dropping the exit was simpler than guarding the leaving board, and focus now returns straight to the new one.
+- On Restart the old board fades out while the new one waits. Tile ids repeat across rounds, so each tile reads Motion's `useIsPresent` and turns `inert` while its board leaves: no clicks, no returning focus.
 - Counting time from timestamps rather than ticks keeps the part of a second played before a pause, while a plain 1s interval is enough to refresh the display.
 - The React Compiler kept the tiles from re-rendering on each clock tick without splitting the context.
 
