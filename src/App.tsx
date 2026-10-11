@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router";
 import { MotionConfig } from "motion/react";
-import { GameProvider } from "@/contexts/GameProvider";
+import GameProvider from "@/contexts/GameProvider";
 import Game from "@/pages/Game";
 import Start from "@/pages/Start";
 

@@ -5,7 +5,7 @@ import { gameReducer } from "@/contexts/game-reducer";
 import { getFlippedTiles } from "@/utils/board";
 import { useEffect, useReducer, type PropsWithChildren } from "react";
 
-export function GameProvider({ children }: PropsWithChildren) {
+export default function GameProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
   const { status, isChecking, roundId, board } = state;
