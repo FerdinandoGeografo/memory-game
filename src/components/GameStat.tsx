@@ -6,7 +6,7 @@ import {
   STAT_HIGHLIGHTS,
   statVariants,
   valueVariants,
-} from "@/constants/styles/game-stat";
+} from "@/constants/game-stat";
 import { cn } from "@/lib/utils";
 
 interface GameStatProps extends VariantProps<typeof statVariants> {

@@ -85,7 +85,7 @@ src/
 ├── game/         pure logic: reducer, results summary, screen-reader announcements
 ├── contexts/     game context and provider (match check and clock timers)
 ├── hooks/        context access, game actions, results summary
-├── constants/    options, initial state, timing, tile icons; styles/ holds style maps
+├── constants/    options, initial state, timing, tile icons and style maps
 ├── types/        shared types
 ├── lib/motion/   transitions and variants, tile animation presets
 └── utils/        board and player generation, time and tile-name formatting

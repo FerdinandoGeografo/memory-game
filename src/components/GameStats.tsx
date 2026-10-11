@@ -1,7 +1,7 @@
 import { motion } from "motion/react";
 import GameStat from "@/components/GameStat";
 import PlayerCard from "@/components/PlayerCard";
-import { STATS_SPACING } from "@/constants/styles/game-stats";
+import { STATS_SPACING } from "@/constants/game-stats";
 import useGame from "@/hooks/useGame";
 import { fadeDown, staggerChildren } from "@/lib/motion/variants";
 import { cn } from "@/lib/utils";

@@ -3,7 +3,7 @@ import { fadeUp } from "@/lib/motion/variants";
 import {
   DEFAULT_OPTION_GAP,
   OPTION_GAP_BY_COUNT,
-} from "@/constants/styles/option-group";
+} from "@/constants/option-group";
 import type { Option } from "@/types/option";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 
