@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
-
 @font-face {
   font-family: "Atkinson Hyperlegible";
-  src: url("/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.woff2") format("woff2");
+  src: url("/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -20,8 +20,7 @@
 }
 
 @layer base {
-  button:not(:disabled),
-  [role="button"]:not(:disabled) {
+  button {
     cursor: pointer;
   }
 
@@ -37,15 +36,15 @@
 
 @theme {
   --font-sans: "Atkinson Hyperlegible", sans-serif;
-  
+
   --color-neutral-100: #fcfcfc;
   --color-neutral-200: #f2f2f2;
 
-  --color-orange-300: #FFB84A;
+  --color-orange-300: #ffb84a;
   --color-orange-500: #fda214;
 
   --color-blue-200: #bcced9;
-  --color-blue-300: #DFE7EC;
+  --color-blue-300: #dfe7ec;
   --color-blue-500: #6395b8;
   --color-blue-600: #7191a5;
   --color-blue-700: #304859;
@@ -59,21 +58,21 @@
   --text-xs--line-height: 1rem;
   --text-sm: 0.9375rem;
   --text-sm--line-height: 1.1875rem;
-  --text-base: 1rem; 
+  --text-base: 1rem;
   --text-base--line-height: 1.25rem;
-  --text-lg: 1.125rem; 
+  --text-lg: 1.125rem;
   --text-lg--line-height: 1.375rem;
   --text-xl: 1.25rem;
   --text-xl--line-height: 1.5625rem;
   --text-2xl: 1.5rem;
   --text-2xl--line-height: 1.875rem;
-  --text-3xl: 1.625rem; 
+  --text-3xl: 1.625rem;
   --text-3xl--line-height: 2rem;
   --text-4xl: 2rem;
   --text-4xl--line-height: 2.5rem;
   --text-5xl: 2.5rem;
   --text-5xl--line-height: 3.125rem;
-  --text-6xl: 2.75rem; 
+  --text-6xl: 2.75rem;
   --text-6xl--line-height: 3.4375rem;
   --text-7xl: 3rem;
   --text-7xl--line-height: 3.75rem;

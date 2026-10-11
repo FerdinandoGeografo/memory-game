@@ -1,9 +1,6 @@
 import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion/variants";
-import {
-  DEFAULT_OPTION_GAP,
-  OPTION_GAP_BY_COUNT,
-} from "@/constants/option-group";
+import { OPTION_GAP_BY_COUNT } from "@/constants/option-group";
 import type { Option } from "@/types/option";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
 
@@ -20,7 +17,7 @@ export default function OptionGroup<T extends string>({
   onChange,
   options,
 }: OptionGroupProps<T>) {
-  const gapCls = OPTION_GAP_BY_COUNT[options.length] ?? DEFAULT_OPTION_GAP;
+  const gapCls = OPTION_GAP_BY_COUNT[options.length];
 
   return (
     <motion.fieldset variants={fadeUp()}>

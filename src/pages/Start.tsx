@@ -46,7 +46,7 @@ export default function Start() {
         variants={fadeUp({ step: 0.1, startDelay: 0.15 })}
         initial="hidden"
         animate="visible"
-        className="flex w-full max-w-2xl flex-col rounded-xl bg-neutral-100 p-6 sm:p-14"
+        className="w-full max-w-2xl rounded-xl bg-neutral-100 p-6 sm:p-14"
       >
         <form className="flex flex-col gap-6 sm:gap-8" onSubmit={handleSubmit}>
           <OptionGroup

@@ -41,7 +41,7 @@ function DialogContent({
         <DialogPrimitive.Portal data-slot="dialog-portal" keepMounted>
           <DialogPrimitive.Backdrop
             data-slot="dialog-overlay"
-            className="fixed inset-0 isolate z-50 bg-black/50"
+            className="fixed inset-0 z-50 bg-black/50"
             render={
               <motion.div
                 initial={{ opacity: 0 }}
@@ -56,7 +56,7 @@ function DialogContent({
             <DialogPrimitive.Popup
               data-slot="dialog-content"
               className={cn(
-                "grid w-full gap-6 rounded-xl bg-neutral-200 px-6 pt-8 pb-6 text-lg outline-none sm:max-w-2xl sm:gap-10 sm:px-14 sm:pt-12.75 sm:pb-17.25",
+                "grid w-full gap-6 rounded-xl bg-neutral-200 px-6 pt-8 pb-6 outline-none sm:max-w-2xl sm:gap-10 sm:px-14 sm:pt-12.75 sm:pb-17.25",
                 className,
               )}
               render={

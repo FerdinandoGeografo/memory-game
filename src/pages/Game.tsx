@@ -17,7 +17,7 @@ export default function Game() {
 
   return (
     <div className="min-h-screen bg-neutral-100">
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
+      <div className="mx-auto flex max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
         <GameToolbar />
 
         <main
