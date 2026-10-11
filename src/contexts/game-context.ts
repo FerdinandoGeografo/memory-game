@@ -1,4 +1,9 @@
-import type { GameContextValue } from "@/types/game";
-import { createContext } from "react";
+import { createContext, type Dispatch } from "react";
+import type { GameAction, GameState } from "@/types/game";
+
+export interface GameContextValue {
+  state: GameState;
+  dispatch: Dispatch<GameAction>;
+}
 
 export const GameContext = createContext<GameContextValue | null>(null);

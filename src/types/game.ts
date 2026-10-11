@@ -1,5 +1,3 @@
-import type { Dispatch } from "react";
-
 export type GameTheme = "numbers" | "icons";
 export type PlayerCount = "1" | "2" | "3" | "4";
 export type GridSize = "4x4" | "6x6";
@@ -49,11 +47,6 @@ export type GameAction =
   | { type: "resume"; payload: { now: number } }
   | { type: "tick"; payload: { now: number } }
   | { type: "quit" };
-
-export interface GameContextValue {
-  state: GameState;
-  dispatch: Dispatch<GameAction>;
-}
 
 export type SummaryStat = {
   name: string;
