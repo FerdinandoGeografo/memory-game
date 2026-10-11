@@ -1,6 +1,7 @@
 import { motion } from "motion/react";
 import useGameActions from "@/hooks/useGameActions";
-import useGameSummary from "@/hooks/useGameSummary";
+import { getGameSummary } from "@/game/summary";
+import useGame from "@/hooks/useGame";
 import { fadeUp, staggerChildren } from "@/lib/motion/variants";
 import {
   Dialog,
@@ -19,7 +20,8 @@ interface ResultDialogProps {
 
 export default function ResultDialog({ finalFocus }: ResultDialogProps) {
   const { restart, newGame } = useGameActions();
-  const summary = useGameSummary();
+  const { state } = useGame();
+  const summary = getGameSummary(state);
 
   const open = summary !== null;
 
