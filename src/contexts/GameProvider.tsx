@@ -1,7 +1,8 @@
 import { GameContext } from "@/contexts/game-context";
 import { initialState } from "@/constants/initial-state";
 import { MATCH_DELAY_MS, MISMATCH_DELAY_MS } from "@/constants/timing";
-import { gameReducer } from "@/game/reducer";
+import { gameReducer } from "@/contexts/game-reducer";
+import { getFlippedTiles } from "@/utils/board";
 import { useEffect, useReducer, type PropsWithChildren } from "react";
 
 export function GameProvider({ children }: PropsWithChildren) {
@@ -9,7 +10,7 @@ export function GameProvider({ children }: PropsWithChildren) {
 
   const { status, isChecking, roundId, board } = state;
 
-  const flipped = board.filter((t) => t.state === "flipped");
+  const flipped = getFlippedTiles(board);
   const isPendingMatch =
     flipped.length === 2 && flipped[0].value === flipped[1].value;
 

@@ -1,5 +1,6 @@
 import type { GameState } from "@/types/game";
-import { getTileValueName } from "@/utils/helpers";
+import { getFlippedTiles } from "@/utils/board";
+import { getTileValueName } from "@/utils/format";
 
 // Every message carries a changing number, so repeated outcomes are still announced
 export function getAnnouncement({
@@ -11,9 +12,9 @@ export function getAnnouncement({
   board,
   moves,
 }: GameState): string {
-  const revealed = board
-    .filter((t) => t.state === "flipped")
-    .map((t) => getTileValueName(t.value, config.theme));
+  const revealed = getFlippedTiles(board).map((t) =>
+    getTileValueName(t.value, config.theme),
+  );
   if (revealed.length > 0) return `Revealed ${revealed.join(" and ")}.`;
 
   if (lastMatch === null || status === "finished") return "";

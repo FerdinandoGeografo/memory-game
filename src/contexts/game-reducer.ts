@@ -1,6 +1,6 @@
 import { initialState } from "@/constants/initial-state";
 import type { GameAction, GameState } from "@/types/game";
-import { generatePlayers } from "@/utils/helpers";
+import { generatePlayers, getFlippedTiles } from "@/utils/board";
 
 function elapsedAt(state: GameState, now: number) {
   return state.runningSince === null
@@ -37,7 +37,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       const newBoard = state.board.map((t) =>
         t.id === selectedTile.id ? { ...t, state: "flipped" as const } : t,
       );
-      const selectedTiles = newBoard.filter((t) => t.state === "flipped");
+      const selectedTiles = getFlippedTiles(newBoard);
 
       return {
         ...state,
@@ -55,7 +55,7 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       )
         return state;
 
-      const flipped = state.board.filter((t) => t.state === "flipped");
+      const flipped = getFlippedTiles(state.board);
       if (flipped.length !== 2) return state;
 
       const [a, b] = flipped;

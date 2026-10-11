@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import useGameActions from "@/hooks/useGameActions";
-import { getGameSummary } from "@/game/summary";
+import { getGameSummary } from "@/utils/summary";
 import useGame from "@/hooks/useGame";
 import { fadeUp, staggerChildren } from "@/lib/motion/variants";
 import {

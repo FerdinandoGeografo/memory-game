@@ -10,7 +10,7 @@ import {
   tileVariants,
 } from "@/lib/motion/tile";
 import { flip, quickSpring } from "@/lib/motion/transitions";
-import { getTileValueName } from "@/utils/helpers";
+import { getTileValueName } from "@/utils/format";
 
 interface TileProps {
   tile: Tile;

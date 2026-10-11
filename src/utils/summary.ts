@@ -1,5 +1,5 @@
 import type { GameState, GameSummary } from "@/types/game";
-import { formatTime } from "@/utils/helpers";
+import { formatTime } from "@/utils/format";
 
 type SummaryInput = Pick<
   GameState,

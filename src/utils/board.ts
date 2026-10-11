@@ -1,12 +1,5 @@
 import { GRID_COLUMNS, TILE_VALUE_COUNT } from "@/constants/game-options";
-import { TILE_ICONS } from "@/constants/tile-icons";
-import type {
-  GameTheme,
-  GridSize,
-  Player,
-  PlayerCount,
-  Tile,
-} from "@/types/game";
+import type { GridSize, Player, PlayerCount, Tile } from "@/types/game";
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -34,15 +27,6 @@ export function generatePlayers(count: PlayerCount): Player[] {
   }));
 }
 
-export function formatTime(ms: number) {
-  const totalSeconds = Math.floor(ms / 1_000);
-  const minutes = Math.floor(totalSeconds / 60);
-  const seconds = totalSeconds % 60;
-  return `${minutes}:${seconds.toString().padStart(2, "0")}`;
-}
-
-export function getTileValueName(value: number, theme: GameTheme) {
-  return theme === "numbers"
-    ? String(value)
-    : TILE_ICONS[value].iconName.replaceAll("-", " ");
+export function getFlippedTiles(board: Tile[]): Tile[] {
+  return board.filter((t) => t.state === "flipped");
 }

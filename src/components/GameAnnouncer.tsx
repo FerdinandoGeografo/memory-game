@@ -1,4 +1,4 @@
-import { getAnnouncement } from "@/game/announcement";
+import { getAnnouncement } from "@/utils/announcement";
 import useGame from "@/hooks/useGame";
 
 export default function GameAnnouncer() {

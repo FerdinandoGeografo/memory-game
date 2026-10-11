@@ -4,7 +4,7 @@ import PlayerCard from "@/components/PlayerCard";
 import { statsVariants } from "@/constants/game-stats";
 import useGame from "@/hooks/useGame";
 import { fadeDown, staggerChildren } from "@/lib/motion/variants";
-import { formatTime } from "@/utils/helpers";
+import { formatTime } from "@/utils/format";
 
 export default function GameStats() {
   const {
