@@ -10,8 +10,6 @@ This is a solution to the [Memory game challenge on Frontend Mentor](https://www
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [Getting started](#getting-started)
-  - [Project structure](#project-structure)
   - [How it works](#how-it-works)
   - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
@@ -32,12 +30,8 @@ Users should be able to:
 
 ### Screenshots
 
-Captured from the running app.
-
-| Desktop, 4 players, icons, 6x6                                     | Mobile, solo, numbers, 4x4                                           |
-| ------------------------------------------------------------------ | -------------------------------------------------------------------- |
-| ![Four-player game on a 6x6 icon board](./screenshots/desktop.png) | ![Solo game on a 4x4 number board, mobile](./screenshots/mobile.png) |
-
+![Four-player game on a 6x6 icon board](./screenshots/desktop.png)
+![Solo game on a 4x4 number board, mobile](./screenshots/mobile.png) |
 ![Multiplayer results dialog with the winner highlighted](./screenshots/results.png)
 
 ### Links
@@ -49,47 +43,14 @@ Captured from the running app.
 
 ### Built with
 
-- Semantic HTML: a `main` landmark, labelled board and dialogs, and a polite live region for reveals, matches and turns
+- Semantic HTML
 - Mobile-first layout with Tailwind CSS 4 utilities, CSS Grid and Flexbox, and design tokens in `@theme`
 - [React 19](https://react.dev/) with TypeScript (strict), Context + `useReducer` and the [React Compiler](https://react.dev/learn/react-compiler)
 - [Vite](https://vite.dev/) - build tool and dev server
-- [React Router](https://reactrouter.com/) - `/start` and `/game` routes
+- [React Router](https://reactrouter.com/)
 - [Base UI](https://base-ui.com/) components through local [shadcn](https://ui.shadcn.com/) wrappers - buttons, toggle groups and dialogs
 - [Motion](https://motion.dev/) - tile flips, board entrance, dialogs and the current-turn highlight
 - [Font Awesome](https://fontawesome.com/) - tile icons
-- [Atkinson Hyperlegible](https://www.brailleinstitute.org/freefont/) Bold, self-hosted as a preloaded WOFF2 (SIL Open Font License)
-
-### Getting started
-
-Requires Node.js and npm.
-
-```bash
-npm ci          # install the locked dependencies
-npm run dev     # start the dev server
-npm run lint    # ESLint
-npm run build   # type-check and production build
-npm run preview # serve the production build
-```
-
-There is no automated test suite: changes are checked with lint, the type-checked build and the running app in the browser.
-
-### Project structure
-
-Each file has one responsibility: a component with its own props, or a group of types, constants or pure functions.
-
-```text
-src/
-├── pages/        Start (setup) and Game routes
-├── components/   one component per file: board, tile, stats, player card, toolbar, dialogs
-├── ui/           local shadcn wrappers around Base UI (button, toggle group, dialog)
-├── game/         pure logic: reducer, results summary, screen-reader announcements
-├── contexts/     game context and provider (match check and clock timers)
-├── hooks/        context access, game actions, results summary
-├── constants/    options, initial state, timing, tile icons and style maps
-├── types/        shared types
-├── lib/motion/   transitions and variants, tile animation presets
-└── utils/        board and player generation, time and tile-name formatting
-```
 
 ### How it works
 
@@ -102,7 +63,7 @@ src/
 
 ### What I learned
 
-- Code-splitting two routes was not worth it here: the start screen preloaded the game page anyway, and a single bundle reached first paint sooner on a throttled connection.
+- Code-splitting two routes was not worth it here: the start screen preloaded the game page anyway.
 - On Restart the old board fades out while the new one waits. Tile ids repeat across rounds, so each tile reads Motion's `useIsPresent` and turns `inert` while its board leaves: no clicks, no returning focus.
 - Counting time from timestamps rather than ticks keeps the part of a second played before a pause, while a plain 1s interval is enough to refresh the display.
 - The React Compiler kept the tiles from re-rendering on each clock tick without splitting the context.
@@ -113,12 +74,10 @@ src/
 - [You might not need an effect](https://react.dev/learn/you-might-not-need-an-effect)
 - [Base UI: animation](https://base-ui.com/react/handbook/animation)
 - [Motion: accessibility](https://motion.dev/docs/react-accessibility)
-- [web.dev: best practices for fonts](https://web.dev/articles/font-best-practices)
 
 ### AI Collaboration
 
-- [Claude Code](https://claude.com/claude-code) worked on the project with me: audits, implementation on feature branches, browser checks against the design and documentation.
-- ChatGPT helped review the project and prepare the prompts given to Claude Code.
+I used [Claude Code](https://claude.com/claude-code) mainly as a reviewer. Most of the work went into setting up its context: a `CLAUDE.md` with the working agreement, rules for state, UI primitives, motion and verification, a design reference taken from the Figma file, and a few skills (Motion, shadcn, Vercel's React best practices and web design guidelines). With that in place, it reviewed code, accessibility and design fidelity, checking its findings in the running app.
 
 ## Author
 
