@@ -75,16 +75,17 @@ There is no automated test suite: changes are checked with lint, the type-checke
 ### How it works
 
 - **State**: one reducer (`src/game/reducer.ts`) holds the board, players, turn, moves and clock. It is pure: the shuffled board and the timestamps arrive in the actions, created when the event happens (`src/hooks/useGameActions.ts`).
+- **Board**: a 6x6 board uses all 18 values (numbers 0-17 or 18 icons); a 4x4 board draws 8 of them at random.
 - **Matching**: after the second tile, the provider waits (longer on a mismatch, so the value can be read), then resolves the pair. The resolution carries a round id, so a check left over from a restarted game is ignored. Pausing freezes the check; resuming starts it again.
 - **Clock**: play time is counted from `performance.now()` timestamps, so pauses keep the part of a second already played and a background tab still counts real time. The last pair stops it.
 - **Navigation**: `/game` without a game in progress redirects to `/start`. Going back to the setup screen ends the current game, so Forward never shows an old board with new options.
-- **Reduced motion**: when the system asks for reduced motion, every Motion animation jumps to its end state (no flips, stagger or delays), and the setting is followed live during play.
+- **Reduced motion**: `MotionConfig reducedMotion="user"` makes flips, scaling and travel instant when the system asks for reduced motion; short fades remain.
 
 ### What I learned
 
 - Code-splitting two routes was not worth it here: the start screen preloaded the game page anyway, and a single bundle reached first paint sooner on a throttled connection.
-- `MotionConfig reducedMotion="user"` only turns off transforms; fades and their delays keep playing. `MotionGlobalConfig.skipAnimations`, updated from a `matchMedia` listener, covers every animation.
-- With `AnimatePresence`, a leaving element is still in the DOM: the restarted board is made `inert` so it can't be clicked or receive returning focus.
+- A restarted board had an exit animation; while it played, its tiles could still be clicked, and tile ids repeat across rounds. Dropping the exit was simpler than guarding the leaving board, and focus now returns straight to the new one.
+- Counting time from timestamps rather than ticks keeps the part of a second played before a pause, while a plain 1s interval is enough to refresh the display.
 - The React Compiler kept the tiles from re-rendering on each clock tick without splitting the context.
 
 ### Useful resources
