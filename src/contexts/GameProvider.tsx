@@ -9,7 +9,7 @@ const MISMATCH_DELAY_MS = 800;
 export function GameProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
-  const { status, isChecking, roundId, board, elapsedMs } = state;
+  const { status, isChecking, roundId, board } = state;
 
   const flipped = board.filter((t) => t.state === "flipped");
   const isPendingMatch =
@@ -32,18 +32,16 @@ export function GameProvider({ children }: PropsWithChildren) {
     return () => clearTimeout(check);
   }, [status, isChecking, roundId, isPendingMatch]);
 
-  // Ticks on each whole second of play, to update the clock on screen. Time
-  // comes from timestamps: a late tick (background tab) still counts it all,
-  // and a pause keeps the part of a second already played.
+  // Time comes from timestamps, so pauses and late ticks lose nothing
   useEffect(() => {
     if (status !== "playing") return;
 
-    const id = setTimeout(
+    const id = setInterval(
       () => dispatch({ type: "tick", payload: { now: performance.now() } }),
-      1_000 - (elapsedMs % 1_000),
+      1_000,
     );
-    return () => clearTimeout(id);
-  }, [status, elapsedMs]);
+    return () => clearInterval(id);
+  }, [status, roundId]);
 
   return (
     <GameContext.Provider
