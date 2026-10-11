@@ -16,7 +16,6 @@ export const initialState: GameState = {
   roundId: 0,
 };
 
-// Play time including the stretch since the clock last started or ticked
 function elapsedAt(state: GameState, now: number) {
   return state.runningSince === null
     ? state.elapsedMs
@@ -62,7 +61,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
     }
 
     case "resolveMatch": {
-      // Only the pending check of the current round, while playing
       if (
         state.status !== "playing" ||
         !state.isChecking ||
@@ -94,7 +92,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         players,
         isChecking: false,
         lastMatch: match,
-        // The last pair stops the clock
         ...(isComplete && {
           status: "finished",
           elapsedMs: elapsedAt(state, action.payload.now),
@@ -132,11 +129,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case "quit":
       if (state.status === "idle") return state;
-      // Keep roundId increasing so a new round never reuses an old identity
       return { ...initialState, config: state.config, roundId: state.roundId };
 
     default: {
-      // Compile-time check: every GameAction must be handled above
       const unhandled: never = action;
       throw new Error(`Unknown action: ${JSON.stringify(unhandled)}`);
     }

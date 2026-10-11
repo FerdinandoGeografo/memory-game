@@ -18,7 +18,6 @@ const SPACING = {
   },
 } as const;
 
-// The stats come in one by one while the board's wave is ending
 const statsVariants = staggerChildren(0.08, 0.5);
 const cardVariants = fadeDown();
 
@@ -34,7 +33,6 @@ function PlayerCard({
       variants={cardVariants}
       className="relative flex-1 lg:max-w-63.75"
     >
-      {/* No animation for the first player: it enters with its card */}
       <AnimatePresence initial={false}>
         {isCurrent && (
           <div

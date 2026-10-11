@@ -2,7 +2,6 @@ import { GameContext } from "@/contexts/game-context";
 import { gameReducer, initialState } from "@/game/reducer";
 import { useEffect, useReducer, type PropsWithChildren } from "react";
 
-// A mismatch stays visible longer so the second value can be read
 const MATCH_DELAY_MS = 450;
 const MISMATCH_DELAY_MS = 800;
 
@@ -15,7 +14,6 @@ export function GameProvider({ children }: PropsWithChildren) {
   const isPendingMatch =
     flipped.length === 2 && flipped[0].value === flipped[1].value;
 
-  // Pausing clears the pending check; resuming schedules it again
   useEffect(() => {
     if (status !== "playing" || !isChecking) return;
 
@@ -32,7 +30,6 @@ export function GameProvider({ children }: PropsWithChildren) {
     return () => clearTimeout(check);
   }, [status, isChecking, roundId, isPendingMatch]);
 
-  // Time comes from timestamps, so pauses and late ticks lose nothing
   useEffect(() => {
     if (status !== "playing") return;
 

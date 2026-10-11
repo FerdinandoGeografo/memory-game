@@ -59,7 +59,6 @@ export default function Tile({
       custom={entranceDelay}
       className="aspect-square"
     >
-      {/* The button never rotates, so focus stays visible on both faces */}
       <motion.button
         type="button"
         aria-label={label}

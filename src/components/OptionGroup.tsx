@@ -37,7 +37,6 @@ export default function OptionGroup<T extends string>({
       <ToggleGroup
         value={[value]}
         onValueChange={(next: string[]) => {
-          // Required single choice: ignore deselection and unknown values
           const option = options.find((o) => o.value === next[0]);
           if (option) onChange(option.value);
         }}

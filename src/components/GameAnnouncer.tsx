@@ -12,14 +12,11 @@ function getAnnouncement({
   board,
   moves,
 }: GameState): string {
-  // The revealed values first: a mismatched tile is covered again within a
-  // second, and a changed label on the focused button isn't always re-read
   const revealed = board
     .filter((t) => t.state === "flipped")
     .map((t) => getTileValueName(t.value, config.theme));
   if (revealed.length > 0) return `Revealed ${revealed.join(" and ")}.`;
 
-  // The results dialog takes over at the end
   if (lastMatch === null || status === "finished") return "";
 
   if (players.length === 1) {

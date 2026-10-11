@@ -42,7 +42,6 @@ export const TILE_ICONS: IconDefinition[] = [
   faCarrot,
 ];
 
-// What a tile shows, in words: its number or its icon's name
 export function getTileValueName(value: number, theme: GameTheme) {
   return theme === "numbers"
     ? String(value)

@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* All text is bold: one face, preloaded in index.html (same URL) */
+
 @font-face {
   font-family: "Atkinson Hyperlegible";
   src: url("/fonts/Atkinson_Hyperlegible/AtkinsonHyperlegible-Bold.woff2") format("woff2");
