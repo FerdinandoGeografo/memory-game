@@ -8,29 +8,24 @@ import {
 import useGame from "@/hooks/useGame";
 import useGameActions from "@/hooks/useGameActions";
 import { fadeDown, fadeUp } from "@/lib/motion/variants";
-import type { GameConfig } from "@/types/game";
 import { Button } from "@/ui/button";
 import { motion } from "motion/react";
-import { useEffect } from "react";
+import { useEffect, useEffectEvent } from "react";
 
 export default function Start() {
   const {
     state: { config },
-    dispatch,
   } = useGame();
-  const { start } = useGameActions();
+  const { start, setConfig, quit } = useGameActions();
+  const quitOnEnter = useEffectEvent(quit);
 
   useEffect(() => {
-    dispatch({ type: "quit" });
-  }, [dispatch]);
+    quitOnEnter();
+  }, []);
 
   function handleSubmit(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     start();
-  }
-
-  function setConfig(config: Partial<GameConfig>) {
-    dispatch({ type: "setConfig", payload: config });
   }
 
   return (

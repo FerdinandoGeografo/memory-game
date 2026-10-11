@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router";
-import { generateBoard } from "@/utils/helpers";
 import useGame from "@/hooks/useGame";
+import type { GameConfig } from "@/types/game";
+import { generateBoard } from "@/utils/helpers";
 
 // Game flow actions used by pages and dialogs. Randomness (the shuffled board)
 // and timestamps are created here, at event time, so the reducer stays pure.
@@ -11,35 +12,60 @@ export default function useGameActions() {
   } = useGame();
   const navigate = useNavigate();
 
+  function setConfig(changes: Partial<GameConfig>) {
+    dispatch({ type: "setConfig", payload: changes });
+  }
+
+  function start() {
+    dispatch({
+      type: "start",
+      payload: {
+        board: generateBoard(config.gridSize),
+        now: performance.now(),
+      },
+    });
+    navigate("/game");
+  }
+
+  function restart() {
+    dispatch({
+      type: "restart",
+      payload: {
+        board: generateBoard(config.gridSize),
+        now: performance.now(),
+      },
+    });
+  }
+
+  function selectTile(tileId: number) {
+    dispatch({ type: "selectTile", payload: { tileId } });
+  }
+
+  function pause() {
+    dispatch({ type: "pause", payload: { now: performance.now() } });
+  }
+
+  function resume() {
+    dispatch({ type: "resume", payload: { now: performance.now() } });
+  }
+
+  function quit() {
+    dispatch({ type: "quit" });
+  }
+
+  function newGame() {
+    quit();
+    navigate("/start");
+  }
+
   return {
-    start() {
-      dispatch({
-        type: "start",
-        payload: {
-          board: generateBoard(config.gridSize),
-          now: performance.now(),
-        },
-      });
-      navigate("/game");
-    },
-    restart() {
-      dispatch({
-        type: "restart",
-        payload: {
-          board: generateBoard(config.gridSize),
-          now: performance.now(),
-        },
-      });
-    },
-    newGame() {
-      dispatch({ type: "quit" });
-      navigate("/start");
-    },
-    pause() {
-      dispatch({ type: "pause", payload: { now: performance.now() } });
-    },
-    resume() {
-      dispatch({ type: "resume", payload: { now: performance.now() } });
-    },
+    setConfig,
+    start,
+    restart,
+    selectTile,
+    pause,
+    resume,
+    quit,
+    newGame,
   };
 }
