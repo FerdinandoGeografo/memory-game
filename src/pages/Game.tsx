@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import GameAnnouncer from "@/components/GameAnnouncer";
 import GameBoard from "@/components/GameBoard";
 import GameStats from "@/components/GameStats";
@@ -16,8 +17,8 @@ export default function Game() {
   if (status === "idle") return <Navigate to="/start" replace />;
 
   return (
-    <div className="min-h-screen bg-neutral-100">
-      <div className="mx-auto flex max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
+    <div className="flex min-h-screen flex-col bg-neutral-100">
+      <div className="mx-auto flex w-full max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
         <GameToolbar />
 
         <main
@@ -31,6 +32,8 @@ export default function Game() {
           <GameStats />
         </main>
       </div>
+
+      <Footer variant="dark" />
 
       <ResultDialog finalFocus={mainRef} />
     </div>

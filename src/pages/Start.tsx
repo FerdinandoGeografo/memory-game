@@ -1,3 +1,4 @@
+import Footer from "@/components/Footer";
 import Logo from "@/components/Logo";
 import OptionGroup from "@/components/OptionGroup";
 import {
@@ -31,7 +32,7 @@ export default function Start() {
   return (
     <div
       data-surface="dark"
-      className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 pt-20 pb-29 sm:gap-19.5 sm:pt-42.25 sm:pb-42 lg:pt-38.5 lg:pb-45.75"
+      className="flex min-h-screen flex-col items-center gap-11.25 bg-blue-800 px-6 pt-20 sm:gap-19.5 sm:pt-42.25 lg:pt-38.5"
     >
       <motion.header variants={fadeDown()} initial="hidden" animate="visible">
         <Logo className="max-sm:text-4xl" />
@@ -72,6 +73,8 @@ export default function Start() {
           </Button>
         </form>
       </motion.main>
+
+      <Footer />
     </div>
   );
 }
