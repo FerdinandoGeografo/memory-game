@@ -2,13 +2,13 @@ import { motion, type Variants } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getTileValueName, TILE_ICONS } from "@/constants/tile-icons";
-import { flip, leave, quickSpring } from "@/lib/motion/transitions";
+import { flip, quickSpring } from "@/lib/motion/transitions";
 
 const ENTRANCE_START = 0.15;
 const ENTRANCE_SPREAD = 0.6;
 
 const tileVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.6, transition: leave },
+  hidden: { opacity: 0, scale: 0.6 },
   visible: (delay: number) => ({
     opacity: 1,
     scale: 1,

@@ -20,11 +20,7 @@ export default function Game() {
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
         <GameToolbar />
 
-        <main
-          ref={mainRef}
-          tabIndex={-1}
-          className="flex flex-col outline-none"
-        >
+        <main ref={mainRef} className="flex flex-col">
           <GameBoard />
           <GameAnnouncer />
 
