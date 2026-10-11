@@ -1,6 +1,7 @@
 import { motion, useIsPresent } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { tileFaceVariants } from "@/constants/tile";
 import { TILE_ICONS } from "@/constants/tile-icons";
 import {
   faceVariants,
@@ -62,9 +63,7 @@ export default function Tile({
           transition={flip}
         >
           <span className="absolute inset-0 rounded-full bg-blue-700 transition-colors backface-hidden group-hover:bg-blue-500" />
-          <span
-            className={`absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors backface-hidden ${tile.state === "flipped" ? "bg-orange-500" : "bg-blue-200"} ${gridSize === "4x4" ? "text-5xl leading-15 sm:text-8xl" : "text-2xl sm:text-6xl sm:leading-15"}`}
-          >
+          <span className={tileFaceVariants({ state: tile.state, gridSize })}>
             {theme === "numbers" ? (
               tile.value
             ) : (

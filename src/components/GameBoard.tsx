@@ -1,5 +1,6 @@
 import useGame from "@/hooks/useGame";
 import Tile from "@/components/Tile";
+import { boardVariants } from "@/constants/game-board";
 import { AnimatePresence, motion } from "motion/react";
 
 export default function GameBoard() {
@@ -20,7 +21,7 @@ export default function GameBoard() {
         animate="visible"
         exit="hidden"
         aria-label="Game board"
-        className={`mt-20 grid w-full max-w-81.75 self-center ${config.gridSize === "4x4" ? "grid-cols-4 gap-3.25 sm:mt-39.25 sm:max-w-133 sm:gap-5 lg:mt-26.25" : "grid-cols-6 gap-2.25 sm:mt-30.25 sm:max-w-143 sm:gap-4 lg:mt-21.25"}`}
+        className={boardVariants({ gridSize: config.gridSize })}
       >
         {board.map((tile, index) => (
           <Tile
