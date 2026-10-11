@@ -1,5 +1,5 @@
 import type { Variants } from "motion/react";
-import { flip, quickSpring } from "./transitions";
+import { flip, quickSpring } from "@/lib/motion/transitions";
 
 const ENTRANCE_START = 0.15;
 const ENTRANCE_SPREAD = 0.6;

@@ -1,9 +1,9 @@
 import { Button } from "@/ui/button";
-import Logo from "./Logo";
+import Logo from "@/components/Logo";
 import useGame from "@/hooks/useGame";
 import useGameActions from "@/hooks/useGameActions";
 import { Dialog, DialogTrigger } from "@/ui/dialog";
-import MenuDialog from "./MenuDialog";
+import MenuDialog from "@/components/MenuDialog";
 
 export default function GameToolbar() {
   const {

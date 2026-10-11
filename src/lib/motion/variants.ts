@@ -1,6 +1,6 @@
 import { stagger, type Variants } from "motion/react";
 import type { EnterOptions } from "@/types/motion";
-import { leave, quickSpring, spring } from "./transitions";
+import { leave, quickSpring, spring } from "@/lib/motion/transitions";
 
 export function enterFrom({
   x = 0,

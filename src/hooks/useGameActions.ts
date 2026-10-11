@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router";
 import { generateBoard } from "@/utils/helpers";
-import useGame from "./useGame";
+import useGame from "@/hooks/useGame";
 
 // Game flow actions used by pages and dialogs. Randomness (the shuffled board)
 // and timestamps are created here, at event time, so the reducer stays pure.
