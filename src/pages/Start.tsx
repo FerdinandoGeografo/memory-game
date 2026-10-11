@@ -20,8 +20,6 @@ export default function Start() {
   } = useGame();
   const { start } = useGameActions();
 
-  // Coming back here (e.g. browser Back) ends a game in progress, so the
-  // options always describe the next game. dispatch is stable: once per visit.
   useEffect(() => {
     dispatch({ type: "quit" });
   }, [dispatch]);
@@ -41,7 +39,6 @@ export default function Start() {
         <Logo className="max-sm:text-4xl" />
       </motion.header>
 
-      {/* The card rises, then each option group and the button in turn */}
       <motion.main
         variants={fadeUp({ step: 0.1, startDelay: 0.15 })}
         initial="hidden"

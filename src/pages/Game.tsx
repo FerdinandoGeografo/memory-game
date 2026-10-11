@@ -13,8 +13,6 @@ export default function Game() {
   } = useGame();
   const mainRef = useRef<HTMLElement>(null);
 
-  // No game to show (direct visit, refresh, left via Start): back to setup,
-  // replacing this history entry
   if (status === "idle") return <Navigate to="/start" replace />;
 
   return (
@@ -22,8 +20,6 @@ export default function Game() {
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
         <GameToolbar />
 
-        {/* Focus lands here when the results close: the board they leave
-            behind is replaced by a new one */}
         <main
           ref={mainRef}
           tabIndex={-1}

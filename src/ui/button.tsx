@@ -26,8 +26,6 @@ const buttonVariants = cva(
   },
 );
 
-// Grows on hover and presses in on tap. `variants` lets a parent stagger its
-// entrance (see lib/motion/variants).
 function Button({
   className,
   variant = "default",

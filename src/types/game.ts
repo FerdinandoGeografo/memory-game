@@ -30,11 +30,8 @@ export interface GameState {
   players: Player[];
   currentPlayerIndex: number;
   isChecking: boolean;
-  // Outcome of the last resolved pair in this round, for announcements
   lastMatch: boolean | null;
   moves: number;
-  // Play time counted up to runningSince, the performance.now() timestamp the
-  // clock last started or ticked from; null while the clock is stopped
   elapsedMs: number;
   runningSince: number | null;
   roundId: number;

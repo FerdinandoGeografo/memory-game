@@ -3,7 +3,6 @@ import { motion } from "motion/react";
 import { quickSpring } from "@/lib/motion/transitions";
 import { cn } from "@/lib/utils";
 
-// Same press feedback as Button
 function Toggle({ className, ...props }: TogglePrimitive.Props) {
   return (
     <TogglePrimitive

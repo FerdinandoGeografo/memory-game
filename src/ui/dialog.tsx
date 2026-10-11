@@ -6,11 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { fade } from "@/lib/motion/transitions";
 import { popIn } from "@/lib/motion/variants";
 
-// The popup grows in, then its children (buttons, header, rows) enter in turn
 const popupVariants = popIn({ step: 0.06, startDelay: 0.1 });
-
-// Exit animations need the open state outside Base UI (Motion + Base UI
-// guidance), so Dialog is controlled and shares `open` with DialogContent.
 const DialogOpenContext = React.createContext(false);
 
 function Dialog({
@@ -56,7 +52,6 @@ function DialogContent({
             }
           />
 
-          {/* Grid centering keeps a tall popup scrollable from its top edge */}
           <DialogPrimitive.Viewport className="fixed inset-0 z-50 grid place-items-center overflow-y-auto p-6">
             <DialogPrimitive.Popup
               data-slot="dialog-content"
@@ -83,8 +78,6 @@ function DialogContent({
   );
 }
 
-// Header and footer are motion elements, so they can take part in the
-// popup's stagger through `variants`
 function DialogHeader({
   className,
   ...props
