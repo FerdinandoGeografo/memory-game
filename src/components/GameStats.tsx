@@ -40,12 +40,12 @@ export default function GameStats() {
       ) : (
         <>
           <GameStat
-            name="time"
+            name="Time"
             value={formatTime(elapsedMs)}
             variants={fadeDown()}
           />
           <GameStat
-            name="moves"
+            name="Moves"
             value={moves.toString()}
             variants={fadeDown()}
           />

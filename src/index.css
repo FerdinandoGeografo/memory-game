@@ -33,10 +33,6 @@
   html {
     scrollbar-color: var(--color-blue-500) var(--color-neutral-100);
   }
-
-  html:has([data-surface="dark"]) {
-    scrollbar-color: var(--color-blue-500) var(--color-blue-800);
-  }
 }
 
 @theme {

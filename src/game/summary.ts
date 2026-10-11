@@ -21,11 +21,11 @@ export function getGameSummary({
       description: "Game over! Here’s how you got on…",
       stats: [
         {
-          name: "Time elapsed",
+          name: "Time Elapsed",
           value: formatTime(elapsedMs),
         },
         {
-          name: "Moves taken",
+          name: "Moves Taken",
           value: `${moves} Moves`,
         },
       ],

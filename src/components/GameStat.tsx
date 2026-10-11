@@ -1,19 +1,18 @@
 import type { VariantProps } from "class-variance-authority";
 import { AnimatePresence, motion, type Variants } from "motion/react";
-import { slide } from "@/lib/motion/transitions";
 import {
   labelVariants,
-  STAT_HIGHLIGHTS,
+  statHighlightVariants,
   statVariants,
   valueVariants,
 } from "@/constants/game-stat";
-import { cn } from "@/lib/utils";
+import { slide } from "@/lib/motion/transitions";
 
 interface GameStatProps extends VariantProps<typeof statVariants> {
   name: string;
   shortName?: string;
   value: string;
-  highlight?: keyof typeof STAT_HIGHLIGHTS;
+  highlight?: VariantProps<typeof statHighlightVariants>["highlight"];
   variants?: Variants;
 }
 
@@ -25,15 +24,15 @@ export default function GameStat({
   variant,
   variants,
 }: GameStatProps) {
-  const tone = highlight ? STAT_HIGHLIGHTS[highlight] : undefined;
+  const highlighted = Boolean(highlight);
 
   return (
     <motion.div variants={variants} className={statVariants({ variant })}>
       <AnimatePresence initial={false}>
-        {tone && (
+        {highlight && (
           <motion.span
             aria-hidden="true"
-            className={cn("absolute inset-0 -z-10", tone.bg)}
+            className={statHighlightVariants({ highlight })}
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
@@ -42,7 +41,7 @@ export default function GameStat({
         )}
       </AnimatePresence>
 
-      <span className={cn(labelVariants({ variant }), tone?.text)}>
+      <span className={labelVariants({ variant, highlighted })}>
         {shortName ? (
           <>
             <span aria-hidden="true" className="sm:hidden">
@@ -54,9 +53,7 @@ export default function GameStat({
           name
         )}
       </span>
-      <span className={cn(valueVariants({ variant }), tone?.text)}>
-        {value}
-      </span>
+      <span className={valueVariants({ variant, highlighted })}>{value}</span>
     </motion.div>
   );
 }

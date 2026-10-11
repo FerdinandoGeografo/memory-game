@@ -38,7 +38,7 @@ export default function PlayerCard({ player, isCurrent }: PlayerCardProps) {
       <GameStat
         variant="player"
         highlight={isCurrent ? "turn" : undefined}
-        name={`player ${player.id}`}
+        name={`Player ${player.id}`}
         shortName={`P${player.id}`}
         value={player.score.toString()}
       />
