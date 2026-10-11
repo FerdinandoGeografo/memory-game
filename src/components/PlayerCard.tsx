@@ -3,6 +3,7 @@ import GameStat from "@/components/GameStat";
 import { leave, quickSpring, slide } from "@/lib/motion/transitions";
 import { fadeDown } from "@/lib/motion/variants";
 import type { Player } from "@/types/game";
+import { playerName } from "@/utils/format";
 
 interface PlayerCardProps {
   player: Player;
@@ -38,7 +39,7 @@ export default function PlayerCard({ player, isCurrent }: PlayerCardProps) {
       <GameStat
         variant="player"
         highlight={isCurrent ? "turn" : undefined}
-        name={`Player ${player.id}`}
+        name={playerName(player.id)}
         shortName={`P${player.id}`}
         value={player.score.toString()}
       />

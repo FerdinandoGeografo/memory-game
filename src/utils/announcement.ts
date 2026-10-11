@@ -1,6 +1,6 @@
 import type { GameState } from "@/types/game";
 import { getFlippedTiles } from "@/utils/board";
-import { getTileValueName } from "@/utils/format";
+import { getTileValueName, playerName, plural } from "@/utils/format";
 
 // Every message carries a changing number, so repeated outcomes are still announced
 export function getAnnouncement({
@@ -23,11 +23,11 @@ export function getAnnouncement({
     const pairs = board.length / 2;
     return lastMatch
       ? `Match! ${players[0].score} of ${pairs} pairs found.`
-      : `No match. ${moves} ${moves === 1 ? "move" : "moves"}.`;
+      : `No match. ${moves} ${plural(moves, "move")}.`;
   }
 
   const current = players[currentPlayerIndex];
   return lastMatch
-    ? `Match! Player ${current.id} has ${current.score} ${current.score === 1 ? "pair" : "pairs"} and plays again.`
-    : `No match. Player ${current.id}'s turn.`;
+    ? `Match! ${playerName(current.id)} has ${current.score} ${plural(current.score, "pair")} and plays again.`
+    : `No match. ${playerName(current.id)}'s turn.`;
 }

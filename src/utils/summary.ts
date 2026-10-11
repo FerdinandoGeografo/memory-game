@@ -1,5 +1,5 @@
 import type { GameState, GameSummary } from "@/types/game";
-import { formatTime } from "@/utils/format";
+import { formatTime, playerName, plural } from "@/utils/format";
 
 type SummaryInput = Pick<
   GameState,
@@ -26,7 +26,7 @@ export function getGameSummary({
         },
         {
           name: "Moves Taken",
-          value: `${moves} Moves`,
+          value: `${moves} ${plural(moves, "Move")}`,
         },
       ],
     };
@@ -38,12 +38,15 @@ export function getGameSummary({
 
   return {
     isSolo: false,
-    title: winners.length > 1 ? "It’s a tie!" : `Player ${winners[0].id} Wins!`,
+    title:
+      winners.length > 1 ? "It’s a tie!" : `${playerName(winners[0].id)} Wins!`,
     description: "Game over! Here are the results…",
     stats: ranked.map((p) => ({
       name:
-        p.score === topScore ? `Player ${p.id} (Winner!)` : `Player ${p.id}`,
-      value: `${p.score} ${p.score === 1 ? "Pair" : "Pairs"}`,
+        p.score === topScore
+          ? `${playerName(p.id)} (Winner!)`
+          : playerName(p.id),
+      value: `${p.score} ${plural(p.score, "Pair")}`,
       isWinner: p.score === topScore,
     })),
   };

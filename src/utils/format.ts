@@ -13,3 +13,15 @@ export function getTileValueName(value: number, theme: GameTheme) {
     ? String(value)
     : TILE_ICONS[value].iconName.replaceAll("-", " ");
 }
+
+export function playerName(id: number) {
+  return `Player ${id}`;
+}
+
+export function plural(
+  count: number,
+  singular: string,
+  pluralForm = `${singular}s`,
+) {
+  return count === 1 ? singular : pluralForm;
+}
