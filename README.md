@@ -31,7 +31,7 @@ Users should be able to:
 ### Screenshots
 
 ![Four-player game on a 6x6 icon board](./screenshots/desktop.png)
-![Solo game on a 4x4 number board, mobile](./screenshots/mobile.png) |
+![Solo game on a 4x4 number board, mobile](./screenshots/mobile.png)
 ![Multiplayer results dialog with the winner highlighted](./screenshots/results.png)
 
 ### Links
@@ -51,6 +51,7 @@ Users should be able to:
 - [Base UI](https://base-ui.com/) components through local [shadcn](https://ui.shadcn.com/) wrappers - buttons, toggle groups and dialogs
 - [Motion](https://motion.dev/) - tile flips, board entrance, dialogs and the current-turn highlight
 - [Font Awesome](https://fontawesome.com/) - tile icons
+- [class-variance-authority](https://cva.style/) - typed style variants for Tailwind classes
 
 ### How it works
 
@@ -60,6 +61,17 @@ Users should be able to:
 - **Clock**: play time is counted from `performance.now()` timestamps, so pauses keep the part of a second already played and a background tab still counts real time. The last pair stops it.
 - **Navigation**: `/game` without a game in progress redirects to `/start`. Going back to the setup screen ends the current game, so Forward never shows an old board with new options.
 - **Reduced motion**: `MotionConfig reducedMotion="user"` makes flips, scaling and travel instant when the system asks for reduced motion; short fades remain.
+- **Styles**: every style that depends on a prop (buttons, stats, board, tile faces) is a cva definition in `src/constants`, or next to its wrapper in `src/ui`. Components pass props and never assemble classes by hand; styles that depend on two props at once, like the stats' top margin by mode and grid size, use `compoundVariants`.
+
+  ```ts
+  const statHighlightVariants = cva("absolute inset-0 -z-10", {
+    variants: {
+      highlight: { turn: "bg-orange-500", winner: "bg-blue-800" },
+    },
+  });
+
+  statHighlightVariants({ highlight: "turn" }); // "absolute inset-0 -z-10 bg-orange-500"
+  ```
 
 ### What I learned
 
