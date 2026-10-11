@@ -6,7 +6,6 @@ import { AnimatePresence, motion } from "motion/react";
 import { fade } from "@/lib/motion/transitions";
 import { popIn } from "@/lib/motion/variants";
 
-const popupVariants = popIn({ step: 0.06, startDelay: 0.1 });
 const DialogOpenContext = React.createContext(false);
 
 function Dialog({
@@ -61,7 +60,7 @@ function DialogContent({
               )}
               render={
                 <motion.div
-                  variants={popupVariants}
+                  variants={popIn({ step: 0.06, startDelay: 0.1 })}
                   initial="hidden"
                   animate="visible"
                   exit="hidden"
