@@ -1,7 +1,6 @@
 import { cva } from "class-variance-authority";
 
 const stackedLayout = "flex-col items-center gap-0.5 pt-2.5 pb-2.25";
-
 const textTransition = "transition-colors motion-reduce:transition-none";
 
 export const statVariants = cva(

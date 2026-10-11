@@ -71,7 +71,7 @@ Users should be able to:
     },
   });
 
-  statHighlightVariants({ highlight: "turn" }); // "absolute inset-0 -z-10 bg-orange-500"
+  statHighlightVariants({ highlight: "turn" });
   ```
 
 ### What I learned

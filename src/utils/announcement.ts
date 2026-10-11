@@ -2,7 +2,6 @@ import type { GameState } from "@/types/game";
 import { getFlippedTiles } from "@/utils/board";
 import { getTileValueName, playerName, plural } from "@/utils/format";
 
-// Every message carries a changing number, so repeated outcomes are still announced
 export function getAnnouncement({
   status,
   config,

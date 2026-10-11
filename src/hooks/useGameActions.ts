@@ -3,8 +3,6 @@ import useGame from "@/hooks/useGame";
 import type { GameConfig } from "@/types/game";
 import { generateBoard } from "@/utils/board";
 
-// Game flow actions used by pages and dialogs. Randomness (the shuffled board)
-// and timestamps are created here, at event time, so the reducer stays pure.
 export default function useGameActions() {
   const {
     state: { config },

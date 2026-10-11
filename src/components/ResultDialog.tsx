@@ -26,12 +26,7 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
   const open = summary !== null;
 
   return (
-    <Dialog
-      open={open}
-      // Results close only through Restart or Setup New Game
-      onOpenChange={(_open, details) => details.cancel()}
-    >
-      {/* Header, rows and buttons enter in turn after the popup */}
+    <Dialog open={open} onOpenChange={(_open, details) => details.cancel()}>
       <DialogContent finalFocus={finalFocus}>
         <DialogHeader variants={fadeUp()}>
           <DialogTitle>{summary?.title}</DialogTitle>
@@ -54,7 +49,6 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
           ))}
         </motion.div>
 
-        {/* Player rows keep more room above the buttons than solo stats */}
         <DialogFooter
           variants={fadeUp()}
           className={summary?.isSolo ? undefined : "sm:mt-4"}
