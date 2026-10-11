@@ -9,10 +9,16 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
+// The values of a 6x6 board (numbers 0-17 or one icon each); smaller boards
+// draw theirs at random from these
+const VALUE_COUNT = 18;
+
 export function generateBoard(gridSize: GridSize): Tile[] {
   const dim = gridSize === "4x4" ? 4 : 6;
   const pairsCount = (dim * dim) / 2;
-  const values = Array.from({ length: pairsCount }, (_, i) => i);
+  const values = shuffle(
+    Array.from({ length: VALUE_COUNT }, (_, i) => i),
+  ).slice(0, pairsCount);
   const deck = shuffle([...values, ...values]);
 
   return deck.map((value, id) => ({ id, value, state: "covered" as const }));
