@@ -1,4 +1,5 @@
-import { getGameSummary, type GameSummary } from "@/game/summary";
+import { getGameSummary } from "@/game/summary";
+import type { GameSummary } from "@/types/game";
 import useGame from "./useGame";
 
 export default function useGameSummary(): GameSummary | null {

@@ -22,3 +22,5 @@ export const DEFAULT_GAME_CONFIG: GameConfig = {
   players: "1",
   gridSize: "4x4",
 };
+
+export const TILE_VALUE_COUNT = 18;

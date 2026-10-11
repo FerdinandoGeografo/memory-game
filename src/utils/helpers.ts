@@ -1,4 +1,12 @@
-import type { GridSize, Player, PlayerCount, Tile } from "@/types/game";
+import { TILE_VALUE_COUNT } from "@/constants/game-options";
+import { TILE_ICONS } from "@/constants/tile-icons";
+import type {
+  GameTheme,
+  GridSize,
+  Player,
+  PlayerCount,
+  Tile,
+} from "@/types/game";
 
 function shuffle<T>(items: T[]): T[] {
   const result = [...items];
@@ -9,13 +17,11 @@ function shuffle<T>(items: T[]): T[] {
   return result;
 }
 
-const VALUE_COUNT = 18;
-
 export function generateBoard(gridSize: GridSize): Tile[] {
   const dim = gridSize === "4x4" ? 4 : 6;
   const pairsCount = (dim * dim) / 2;
   const values = shuffle(
-    Array.from({ length: VALUE_COUNT }, (_, i) => i),
+    Array.from({ length: TILE_VALUE_COUNT }, (_, i) => i),
   ).slice(0, pairsCount);
   const deck = shuffle([...values, ...values]);
 
@@ -34,4 +40,10 @@ export function formatTime(ms: number) {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+}
+
+export function getTileValueName(value: number, theme: GameTheme) {
+  return theme === "numbers"
+    ? String(value)
+    : TILE_ICONS[value].iconName.replaceAll("-", " ");
 }

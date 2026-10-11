@@ -11,7 +11,7 @@ import {
   DialogFooter,
 } from "@/ui/dialog";
 import { Button } from "@/ui/button";
-import { GameStat } from "./GameStat";
+import GameStat from "@/components/GameStat";
 
 interface ResultDialogProps {
   finalFocus: React.RefObject<HTMLElement | null>;

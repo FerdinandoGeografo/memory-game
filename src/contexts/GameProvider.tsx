@@ -1,9 +1,8 @@
 import { GameContext } from "@/contexts/game-context";
-import { gameReducer, initialState } from "@/game/reducer";
+import { initialState } from "@/constants/initial-state";
+import { MATCH_DELAY_MS, MISMATCH_DELAY_MS } from "@/constants/timing";
+import { gameReducer } from "@/game/reducer";
 import { useEffect, useReducer, type PropsWithChildren } from "react";
-
-const MATCH_DELAY_MS = 450;
-const MISMATCH_DELAY_MS = 800;
 
 export function GameProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(gameReducer, initialState);

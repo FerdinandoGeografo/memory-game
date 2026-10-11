@@ -1,30 +1,14 @@
-import { motion, type Variants } from "motion/react";
+import { motion } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { getTileValueName, TILE_ICONS } from "@/constants/tile-icons";
+import { TILE_ICONS } from "@/constants/tile-icons";
+import {
+  faceVariants,
+  tileEntranceDelay,
+  tileVariants,
+} from "@/lib/motion/tile";
 import { flip, quickSpring } from "@/lib/motion/transitions";
-
-const ENTRANCE_START = 0.15;
-const ENTRANCE_SPREAD = 0.6;
-
-const tileVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.6 },
-  visible: (delay: number) => ({
-    opacity: 1,
-    scale: 1,
-    transition: { ...quickSpring, delay },
-  }),
-};
-
-const faceVariants: Variants = {
-  covered: { rotateY: 0, scale: 1 },
-  flipped: { rotateY: 180, scale: 1 },
-  matched: {
-    rotateY: 180,
-    scale: [1, 1.08, 1],
-    transition: { ...flip, scale: { duration: 0.4, ease: "easeInOut" } },
-  },
-};
+import { getTileValueName } from "@/utils/helpers";
 
 interface TileProps {
   tile: Tile;
@@ -45,8 +29,7 @@ export default function Tile({
   const row = Math.floor(index / columns);
   const column = index % columns;
   const position = `Row ${row + 1}, column ${column + 1}`;
-  const entranceDelay =
-    ENTRANCE_START + ((row + column) / (2 * (columns - 1))) * ENTRANCE_SPREAD;
+  const entranceDelay = tileEntranceDelay(row, column, columns);
   const valueName = getTileValueName(tile.value, theme);
   const isCovered = tile.state === "covered";
   const label = isCovered

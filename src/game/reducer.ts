@@ -1,20 +1,6 @@
-import { DEFAULT_GAME_CONFIG } from "@/constants/game-options";
+import { initialState } from "@/constants/initial-state";
 import type { GameAction, GameState } from "@/types/game";
 import { generatePlayers } from "@/utils/helpers";
-
-export const initialState: GameState = {
-  config: DEFAULT_GAME_CONFIG,
-  status: "idle",
-  board: [],
-  players: [],
-  currentPlayerIndex: 0,
-  isChecking: false,
-  lastMatch: null,
-  moves: 0,
-  elapsedMs: 0,
-  runningSince: null,
-  roundId: 0,
-};
 
 function elapsedAt(state: GameState, now: number) {
   return state.runningSince === null

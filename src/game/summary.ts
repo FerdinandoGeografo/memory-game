@@ -1,18 +1,5 @@
-import type { GameState } from "@/types/game";
+import type { GameState, GameSummary } from "@/types/game";
 import { formatTime } from "@/utils/helpers";
-
-type SummaryStat = {
-  name: string;
-  value: string;
-  isWinner?: boolean;
-};
-
-export type GameSummary = {
-  isSolo: boolean;
-  title: string;
-  description: string;
-  stats: SummaryStat[];
-};
 
 type SummaryInput = Pick<
   GameState,
