@@ -1,20 +1,16 @@
 import type { GameState } from "@/types/game";
 import { getFlippedTiles } from "@/utils/board";
-import { getTileValueName, playerName, plural } from "@/utils/format";
+import { playerName, plural } from "@/utils/format";
 
 export function getAnnouncement({
   status,
-  config,
   lastMatch,
   players,
   currentPlayerIndex,
   board,
   moves,
 }: GameState): string {
-  const revealed = getFlippedTiles(board).map((t) =>
-    getTileValueName(t.value, config.theme),
-  );
-  if (revealed.length > 0) return `Revealed ${revealed.join(" and ")}.`;
+  if (getFlippedTiles(board).length > 0) return "";
 
   if (lastMatch === null || status === "finished") return "";
 
