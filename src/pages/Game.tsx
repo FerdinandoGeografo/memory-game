@@ -17,7 +17,7 @@ export default function Game() {
   if (status === "idle") return <Navigate to="/start" replace />;
 
   return (
-    <div className="flex min-h-screen flex-col bg-neutral-100">
+    <div className="flex min-h-dvh flex-col bg-neutral-100">
       <div className="mx-auto flex w-full max-w-7xl flex-col px-6 pt-6 md:px-10 md:pt-9.25 lg:px-41.25 lg:pt-16.75">
         <GameToolbar />
 
