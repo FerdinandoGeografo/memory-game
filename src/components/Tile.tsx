@@ -1,7 +1,7 @@
+import { cva } from "class-variance-authority";
 import { motion, useIsPresent } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
 import { GRID_COLUMNS } from "@/constants/game-options";
-import { tileFaceVariants } from "@/constants/tile";
 import { TILE_ICONS } from "@/constants/tile-icons";
 import {
   faceVariants,
@@ -10,6 +10,23 @@ import {
 } from "@/lib/motion/tile";
 import { flip, quickSpring } from "@/lib/motion/transitions";
 import { getTileValueName } from "@/utils/format";
+
+const tileFaceVariants = cva(
+  "absolute inset-0 flex rotate-y-180 items-center justify-center rounded-full text-neutral-100 transition-colors backface-hidden",
+  {
+    variants: {
+      state: {
+        covered: "bg-blue-200",
+        flipped: "bg-orange-500",
+        matched: "bg-blue-200",
+      },
+      gridSize: {
+        "4x4": "text-5xl leading-15 sm:text-8xl",
+        "6x6": "text-2xl sm:text-6xl sm:leading-15",
+      },
+    },
+  },
+);
 
 interface TileProps {
   tile: Tile;

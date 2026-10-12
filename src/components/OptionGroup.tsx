@@ -1,8 +1,12 @@
 import { motion } from "motion/react";
 import { fadeUp } from "@/lib/motion/variants";
-import { OPTION_GAP_BY_COUNT } from "@/constants/option-group";
 import type { Option } from "@/types/option";
 import { ToggleGroup, ToggleGroupItem } from "@/ui/toggle-group";
+
+const OPTION_GAP_BY_COUNT: Record<number, string> = {
+  2: "gap-2.75 sm:gap-7.5",
+  4: "gap-2.5 sm:gap-5.5",
+};
 
 interface OptionGroupProps<T extends string> {
   label: string;
