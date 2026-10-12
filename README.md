@@ -36,8 +36,8 @@ Users should be able to:
 
 ### Links
 
-- Repository: [github.com/FerdinandoGeografo/memory-game](https://github.com/FerdinandoGeografo/memory-game)
-- Live site: [memory-game-fg.vercel.app](https://memory-game-fg.vercel.app/)
+- Solution URL: [GitHub Repository](https://github.com/FerdinandoGeografo/memory-game)
+- Live site URL: [Memory Game](https://memory-game-fg.vercel.app/)
 
 ## My process
 
