@@ -16,4 +16,28 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  build: {
+    rolldownOptions: {
+      output: {
+        codeSplitting: {
+          groups: [
+            {
+              name: "react",
+              test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/,
+            },
+            { name: "router", test: /node_modules[\\/]react-router[\\/]/ },
+            {
+              name: "motion",
+              test: /node_modules[\\/](motion|motion-dom|motion-utils|framer-motion)[\\/]/,
+            },
+            {
+              name: "base-ui",
+              test: /node_modules[\\/](@base-ui|@floating-ui)[\\/]/,
+            },
+            { name: "vendor", test: /node_modules[\\/]/ },
+          ],
+        },
+      },
+    },
+  },
 });
