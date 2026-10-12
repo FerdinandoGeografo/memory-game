@@ -6,6 +6,7 @@ This is a solution to the [Memory game challenge on Frontend Mentor](https://www
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
+  - [Expected behaviour](#expected-behaviour)
   - [Screenshots](#screenshots)
   - [Links](#links)
 - [My process](#my-process)
@@ -27,6 +28,17 @@ Users should be able to:
 - Play the Memory game either solo or multiplayer (up to 4 players)
 - Set the theme to use numbers or icons within the tiles
 - Choose to play on either a 6x6 or 4x4 grid
+
+### Expected behaviour
+
+- You can choose to make the default screen either the Start Game screen or the solo player 4x4 grid. Note that we're using the solo player 4x4 grid for the design screenshot, so if you choose the Start Game screen, it won't match up in the design comparison slider. This isn't a big deal, but is something worth considering.
+- In a solo game, track the time elapsed since first clicking on a tile and the total number of moves made. A move counts as two tiles being selected as a potential match. Once all pairs have been found, stop the timer and show the end of game modal with the stats.
+- In a multiplayer game, track the total number of pairs each player has found. If a player finds a pair, increment their score by one. The current turn switches to the next player after the current player has made a move to find a potential match.
+- Clicking "Restart" will restart the game with the current settings.
+- Clicking "New Game" will go to the Start Game screen where the player can choose their settings.
+- The icons in the design are from Font Awesome. Please choose whatever icons you prefer. You could even use a different icon library, if you like.
+
+This solution opens on the Start Game screen. The mobile menu also pauses the game, which the brief doesn't ask for: paused time is not counted.
 
 ### Screenshots
 
@@ -59,10 +71,11 @@ Users should be able to:
 - **Derived values**: the results summary and the screen-reader announcements are pure functions of the state (`src/utils`), recomputed whenever the context re-renders their component.
 - **Board**: every new board draws its values at random, 8 pairs on 4x4 and 18 on 6x6, from the numbers 0-99 or from 40 icons.
 - **Matching**: after the second tile, the provider waits (longer on a mismatch, so the value can be read), then resolves the pair. The resolution carries a round id, so a check left over from a restarted game is ignored. Pausing freezes the check; resuming starts it again.
-- **Clock**: play time is counted from `performance.now()` timestamps, so pauses keep the part of a second already played and a background tab still counts real time. The last pair stops it.
+- **Clock**: in a solo game the clock starts with the first tile, not with Start Game or Restart, so the board entrance and any time spent looking at it are not counted. Play time is counted from `performance.now()` timestamps, so pauses keep the part of a second already played and a background tab still counts real time. The last pair stops it. Multiplayer games show no time, so they run no clock and no interval.
+- **Announcements**: each tile's accessible name gives its position, and its value once revealed. A polite status region announces only what a tile can't: match or no match, pairs found or moves, and whose turn it is. It stays silent while a pair is being revealed.
 - **Navigation**: `/game` without a game in progress redirects to `/start`. Going back to the setup screen ends the current game, so Forward never shows an old board with new options. Every route change starts from the top of the page.
 - **Reduced motion**: `MotionConfig reducedMotion="user"` makes flips, scaling and travel instant when the system asks for reduced motion; short fades remain.
-- **Styles**: styles with several variants or combinations (buttons, stats, board, tile faces) are cva definitions in `src/constants`, or next to their wrapper in `src/ui`; those that depend on two props at once, like the stats' top margin by mode and grid size, use `compoundVariants`. Simple two-state cases, like the logo color, stay plain conditional classes.
+- **Styles**: styles with several variants or combinations (buttons, stats, board, tile faces) are cva definitions kept, unexported, in the component that uses them, in `src/components` or in its wrapper in `src/ui`; `src/constants` keeps only shared game data. Those that depend on two props at once, like the stats' top margin by mode and grid size, use `compoundVariants`. Simple two-state cases, like the logo color, stay plain conditional classes.
 
   ```ts
   const statHighlightVariants = cva("absolute inset-0 -z-10", {
@@ -79,7 +92,7 @@ Users should be able to:
 - Code-splitting two routes was not worth it here: the start screen preloaded the game page anyway.
 - On Restart the old board fades out while the new one waits. Tile ids repeat across rounds, so each tile reads Motion's `useIsPresent` and turns `inert` while its board leaves: no clicks, no returning focus.
 - Counting time from timestamps rather than ticks keeps the part of a second played before a pause, while a plain 1s interval is enough to refresh the display.
-- The React Compiler kept the tiles from re-rendering on each clock tick without splitting the context.
+- The React Compiler kept the tiles from re-rendering on each clock tick without splitting the context: measured in development, a solo 4x4 game re-renders 16 tiles per tick without it and none with it.
 
 ### Useful resources
 
