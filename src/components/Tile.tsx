@@ -1,6 +1,5 @@
 import { motion, useIsPresent } from "motion/react";
 import type { GameTheme, GridSize, Tile } from "@/types/game";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { GRID_COLUMNS } from "@/constants/game-options";
 import { tileFaceVariants } from "@/constants/tile";
 import { TILE_ICONS } from "@/constants/tile-icons";
@@ -68,10 +67,12 @@ export default function Tile({
             {theme === "numbers" ? (
               tile.value
             ) : (
-              <FontAwesomeIcon
-                className="size-[48%]!"
-                icon={TILE_ICONS[tile.value]}
-              />
+              <svg
+                viewBox={TILE_ICONS[tile.value].viewBox}
+                className="size-[48%] overflow-visible"
+              >
+                <path fill="currentColor" d={TILE_ICONS[tile.value].path} />
+              </svg>
             )}
           </span>
         </motion.span>

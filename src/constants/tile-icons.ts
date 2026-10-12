@@ -1,4 +1,3 @@
-import { type IconDefinition } from "@fortawesome/fontawesome-svg-core";
 import {
   faAnchor,
   faFlask,
@@ -42,7 +41,7 @@ import {
   faUmbrella,
 } from "@fortawesome/free-solid-svg-icons";
 
-export const TILE_ICONS: IconDefinition[] = [
+export const TILE_ICONS = [
   faAnchor,
   faFlask,
   faSun,
@@ -83,4 +82,8 @@ export const TILE_ICONS: IconDefinition[] = [
   faRocket,
   faTree,
   faUmbrella,
-];
+].map(({ iconName, icon: [width, height, , , path] }) => ({
+  iconName,
+  viewBox: `0 0 ${width} ${height}`,
+  path: [path].flat().join(" "),
+}));
