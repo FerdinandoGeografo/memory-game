@@ -39,10 +39,10 @@ export type GameState = {
 
 export type GameAction =
   | { type: "setConfig"; payload: Partial<GameConfig> }
-  | { type: "start"; payload: { board: Tile[]; now: number } }
-  | { type: "selectTile"; payload: { tileId: number } }
+  | { type: "start"; payload: { board: Tile[] } }
+  | { type: "selectTile"; payload: { tileId: number; now: number } }
   | { type: "resolveMatch"; payload: { roundId: number; now: number } }
-  | { type: "restart"; payload: { board: Tile[]; now: number } }
+  | { type: "restart"; payload: { board: Tile[] } }
   | { type: "pause"; payload: { now: number } }
   | { type: "resume"; payload: { now: number } }
   | { type: "tick"; payload: { now: number } }

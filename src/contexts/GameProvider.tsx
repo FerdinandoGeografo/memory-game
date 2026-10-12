@@ -8,11 +8,13 @@ import { useEffect, useReducer, type PropsWithChildren } from "react";
 export default function GameProvider({ children }: PropsWithChildren) {
   const [state, dispatch] = useReducer(gameReducer, initialState);
 
-  const { status, isChecking, roundId, board } = state;
+  const { status, isChecking, roundId, board, players, runningSince } = state;
 
   const flipped = getFlippedTiles(board);
   const isPendingMatch =
     flipped.length === 2 && flipped[0].value === flipped[1].value;
+  const isClockRunning =
+    status === "playing" && players.length === 1 && runningSince !== null;
 
   useEffect(() => {
     if (status !== "playing" || !isChecking) return;
@@ -31,14 +33,14 @@ export default function GameProvider({ children }: PropsWithChildren) {
   }, [status, isChecking, roundId, isPendingMatch]);
 
   useEffect(() => {
-    if (status !== "playing") return;
+    if (!isClockRunning) return;
 
     const id = setInterval(
       () => dispatch({ type: "tick", payload: { now: performance.now() } }),
       TICK_MS,
     );
     return () => clearInterval(id);
-  }, [status, roundId]);
+  }, [isClockRunning, roundId]);
 
   return (
     <GameContext.Provider

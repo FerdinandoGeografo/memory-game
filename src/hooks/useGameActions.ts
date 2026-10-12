@@ -17,10 +17,7 @@ export default function useGameActions() {
   function start() {
     dispatch({
       type: "start",
-      payload: {
-        board: generateBoard(config),
-        now: performance.now(),
-      },
+      payload: { board: generateBoard(config) },
     });
     navigate("/game");
   }
@@ -28,15 +25,15 @@ export default function useGameActions() {
   function restart() {
     dispatch({
       type: "restart",
-      payload: {
-        board: generateBoard(config),
-        now: performance.now(),
-      },
+      payload: { board: generateBoard(config) },
     });
   }
 
   function selectTile(tileId: number) {
-    dispatch({ type: "selectTile", payload: { tileId } });
+    dispatch({
+      type: "selectTile",
+      payload: { tileId, now: performance.now() },
+    });
   }
 
   function pause() {

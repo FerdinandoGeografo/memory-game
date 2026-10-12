@@ -8,6 +8,10 @@ function elapsedAt(state: GameState, now: number) {
     : state.elapsedMs + now - state.runningSince;
 }
 
+function hasStarted(state: GameState) {
+  return state.moves > 0 || state.board.some((t) => t.state !== "covered");
+}
+
 export function gameReducer(state: GameState, action: GameAction): GameState {
   switch (action.type) {
     case "setConfig":
@@ -22,7 +26,6 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
         status: "playing",
         board: action.payload.board,
         players: generatePlayers(state.config.players),
-        runningSince: action.payload.now,
         roundId: state.roundId + 1,
       };
 
@@ -42,6 +45,9 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
       return {
         ...state,
         board: newBoard,
+        runningSince:
+          state.runningSince ??
+          (state.players.length === 1 ? action.payload.now : null),
         isChecking: selectedTiles.length === 2,
         moves: selectedTiles.length === 2 ? state.moves + 1 : state.moves,
       };
@@ -102,11 +108,18 @@ export function gameReducer(state: GameState, action: GameAction): GameState {
 
     case "resume":
       return state.status === "paused"
-        ? { ...state, status: "playing", runningSince: action.payload.now }
+        ? {
+            ...state,
+            status: "playing",
+            runningSince:
+              state.players.length === 1 && hasStarted(state)
+                ? action.payload.now
+                : null,
+          }
         : state;
 
     case "tick":
-      return state.status === "playing"
+      return state.status === "playing" && state.runningSince !== null
         ? {
             ...state,
             elapsedMs: elapsedAt(state, action.payload.now),
