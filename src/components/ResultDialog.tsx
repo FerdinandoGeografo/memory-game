@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { useRef } from "react";
 import useGameActions from "@/hooks/useGameActions";
 import { getGameSummary } from "@/utils/summary";
 import useGame from "@/hooks/useGame";
@@ -24,12 +25,31 @@ export default function ResultDialog({ finalFocus }: ResultDialogProps) {
   const summary = getGameSummary(state);
 
   const open = summary !== null;
+  const titleRef = useRef<HTMLHeadingElement>(null);
+
+  function focusTitleIfScrollable() {
+    const popup = titleRef.current?.closest<HTMLElement>('[role="dialog"]');
+    const viewport = popup?.parentElement;
+    if (!popup || !viewport) return true;
+
+    const { paddingTop, paddingBottom } = getComputedStyle(viewport);
+    const room =
+      viewport.clientHeight -
+      parseFloat(paddingTop) -
+      parseFloat(paddingBottom);
+    return popup.offsetHeight > room ? titleRef.current : true;
+  }
 
   return (
     <Dialog open={open} onOpenChange={(_open, details) => details.cancel()}>
-      <DialogContent finalFocus={finalFocus}>
+      <DialogContent
+        initialFocus={focusTitleIfScrollable}
+        finalFocus={finalFocus}
+      >
         <DialogHeader variants={fadeUp()}>
-          <DialogTitle>{summary?.title}</DialogTitle>
+          <DialogTitle ref={titleRef} tabIndex={-1} className="outline-none">
+            {summary?.title}
+          </DialogTitle>
           <DialogDescription>{summary?.description}</DialogDescription>
         </DialogHeader>
 
