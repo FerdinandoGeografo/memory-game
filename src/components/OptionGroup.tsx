@@ -24,25 +24,27 @@ export default function OptionGroup<T extends string>({
   const gapCls = OPTION_GAP_BY_COUNT[options.length];
 
   return (
-    <motion.fieldset variants={fadeUp()}>
-      <legend className="mb-2.75 text-sm text-blue-600 sm:mb-4 sm:text-xl">
-        {label}
-      </legend>
+    <motion.div variants={fadeUp()}>
+      <fieldset>
+        <legend className="mb-2.75 text-sm text-blue-600 sm:mb-4 sm:text-xl">
+          {label}
+        </legend>
 
-      <ToggleGroup
-        value={[value]}
-        onValueChange={(next: string[]) => {
-          const option = options.find((o) => o.value === next[0]);
-          if (option) onChange(option.value);
-        }}
-        className={gapCls}
-      >
-        {options.map((option) => (
-          <ToggleGroupItem key={option.value} value={option.value}>
-            {option.label}
-          </ToggleGroupItem>
-        ))}
-      </ToggleGroup>
-    </motion.fieldset>
+        <ToggleGroup
+          value={[value]}
+          onValueChange={(next: string[]) => {
+            const option = options.find((o) => o.value === next[0]);
+            if (option) onChange(option.value);
+          }}
+          className={gapCls}
+        >
+          {options.map((option) => (
+            <ToggleGroupItem key={option.value} value={option.value}>
+              {option.label}
+            </ToggleGroupItem>
+          ))}
+        </ToggleGroup>
+      </fieldset>
+    </motion.div>
   );
 }
